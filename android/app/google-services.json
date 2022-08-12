@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "370230838299",
+    "project_id": "mobyte2",
+    "storage_bucket": "mobyte2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370230838299:android:9fc075aed930f096aa24be",
+        "android_client_info": {
+          "package_name": "com.example.registration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370230838299-pnb80esgapi2gj5s578kcdsb9ffrb0hn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCYYkaYa0LDfWv8akSwaosjTQDkIJ5klc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370230838299-pnb80esgapi2gj5s578kcdsb9ffrb0hn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
