@@ -25,19 +25,9 @@ class AddTrancationEvent extends TrancationEvent {
       this.description = ''});
 }
 
-class EditTrancationEvent extends TrancationEvent {
-  final TransactionType type;
+class EditTrancationEvent extends TrancationEvent {}
 
-  final bool status;
-  final String date;
-  final TransactionCategory category;
-  final double value;
-  final String description;
-  EditTrancationEvent(
-      {required this.type,
-      required this.category,
-      required this.date,
-      required this.status,
-      required this.value,
-      this.description = ''});
+class ChangeReadinessEvent extends TrancationEvent {
+  final TransactionModel transaction;
+  ChangeReadinessEvent({required this.transaction});
 }

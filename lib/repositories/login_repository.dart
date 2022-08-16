@@ -34,7 +34,7 @@ class LoginRepository extends AbstractRepository {
   Future<String> getUserName({required String email}) async {
     var snap =
         await FirebaseFirestore.instance.collection('users').doc(email).get();
-    return await snap.get('username');
+    return await snap.get('userName');
   }
 
   @override
@@ -47,6 +47,7 @@ class LoginRepository extends AbstractRepository {
             .signInWithEmailAndPassword(email: email, password: password);
         user.statusLogged = StateUserLogged.isLogged;
         thisUser.username = await getUserName(email: email);
+        thisUser.email = email;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'wrong-password') {
           print('Wrong password provided for that user.');

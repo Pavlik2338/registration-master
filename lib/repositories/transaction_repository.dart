@@ -43,18 +43,47 @@ class TransactionRepository {
     }
   }
 
-  double resualtMoney({required AsyncSnapshot<dynamic> snap}) {
+  double resualtMoney(
+      {required AsyncSnapshot<dynamic> snap, required bool ready}) {
     double sum = 0;
-    for (var elem in snap.data!.docs
-        .map((DocumentSnapshot doc) => doc.data()! as Map<String, dynamic>)
-        .where((elem) => elem['ready'] == true)) {
-      var transaction = TransactionModel.fromJson(elem);
-      if (transaction.type == TransactionType.profit) {
-        sum += transaction.value;
-      } else {
-        sum -= transaction.value;
+    if (ready) {
+      for (var elem in snap.data!.docs
+          .map((DocumentSnapshot doc) => doc.data()! as Map<String, dynamic>)
+          .where((elem) => elem['ready'] == true)) {
+        var transaction = TransactionModel.fromJson(elem);
+        if (transaction.type == TransactionType.profit) {
+          sum += transaction.value;
+        } else {
+          sum -= transaction.value;
+        }
       }
+    } else {
+      for (var elem in snap.data!.docs
+          .map((DocumentSnapshot doc) => doc.data()! as Map<String, dynamic>)) {
+        var transaction = TransactionModel.fromJson(elem);
+        if (transaction.type == TransactionType.profit) {
+          sum += transaction.value;
+        } else {
+          sum -= transaction.value;
+        }
+      }
+
+      
+    }return sum;
+  }
+
+  Future<bool> changeReadiness({required TransactionModel transaction}) async {
+    try {
+      transaction.ready = !transaction.ready;
+      final docChange = FirebaseFirestore.instance
+          .collection('users')
+          .doc(thisUser.username)
+          .collection('transactions')
+          .doc(transaction.id);
+      docChange.set(transaction.toJson());
+      return true;
+    } on FirebaseAuthException catch (e) {
+      return false;
     }
-    return sum;
   }
 }

@@ -10,6 +10,7 @@ class SwitchField extends StatefulWidget {
   final String firstLebel;
   final String secondLebel;
   final String switchTitle;
+  final bool? type;
   final void Function(TransactionType)? saveType;
   final void Function(bool)? saveStatus;
   SwitchField(
@@ -17,7 +18,8 @@ class SwitchField extends StatefulWidget {
       required this.secondLebel,
       required this.switchTitle,
       this.saveType,
-      this.saveStatus});
+      this.saveStatus,
+      this.type});
   @override
   State<SwitchField> createState() => _SwitchFieldState();
 }
@@ -40,6 +42,7 @@ class _SwitchFieldState extends State<SwitchField> {
           ),
         ),
         ToggleSwitch(
+      
           minWidth: 164.w,
           minHeight: 64.h,
           cornerRadius: 10.0,
@@ -59,7 +62,7 @@ class _SwitchFieldState extends State<SwitchField> {
           labels: [widget.firstLebel, widget.secondLebel],
           radiusStyle: true,
           onToggle: (index) {
-            if (index == 1) {
+            if (index == 0) {
               TransactionType type = TransactionType.profit;
               bool status = true;
               (widget.saveType == null)

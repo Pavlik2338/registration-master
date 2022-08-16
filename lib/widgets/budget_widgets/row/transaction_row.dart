@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:registration/widgets/budget_widgets/color_of_card.dart';
-import '../../models/trancation_model.dart';
+import 'package:registration/widgets/budget_widgets/backgroud/color_of_card.dart';
+import '../../../models/trancation_model.dart';
 
 class TransactionRowElem extends StatelessWidget {
   final TransactionModel transaction;

@@ -59,9 +59,9 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
       Form(
         key: _formKeyPasswordAgain,
         child: SecuredTextField(
+          controller: _passwordAgainController,
           validator: (text) {
             if (_passwordController.text == _passwordAgainController.text) {
-              Validators().validatePassword(text);
             } else {
               return "Passwords don't match";
             }

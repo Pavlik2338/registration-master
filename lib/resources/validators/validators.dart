@@ -31,4 +31,22 @@ class Validators {
     }
     return _msg;
   }
+
+  String? validateRequiredFields(String? value) {
+    String? _msg;
+    if (value == null) {
+      _msg = 'This field is required!';
+    }
+    return _msg;
+  }
+    String? validateMoney(String? value) {
+    String? _msg;
+    RegExp _regExp = RegExp(r'^[0-9]+$');
+    if (value == null) {
+      _msg = 'This field is required!';
+    } else if(!_regExp.hasMatch(value)){
+      _msg = 'Only numbers!';
+    }
+    return _msg;
+  }
 }

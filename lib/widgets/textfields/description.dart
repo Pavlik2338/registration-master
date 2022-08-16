@@ -13,7 +13,7 @@ class DescriptionField extends StatelessWidget {
   DescriptionField(
       {Key? key,
       required this.nameField,
-      required this.controller,
+       this.controller,
       required this.onChanged});
   @override
   Widget build(BuildContext context) {

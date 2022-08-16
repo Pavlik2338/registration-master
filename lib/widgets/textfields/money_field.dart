@@ -10,6 +10,7 @@ import '../../resources/thousands_formatter.dart';
 
 class MoneyField extends StatelessWidget {
   final TextEditingController? controller;
+  
   final String nameField;
   final String? errorText;
   final void Function(String)? onChanged;
@@ -29,6 +30,7 @@ class MoneyField extends StatelessWidget {
         height: 64.h,
         width: 328.w,
         child: TextFormField(
+          key: key,
           keyboardType: TextInputType.number,
           inputFormatters: [],
           validator: validator,

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/models/user_model.dart';
-import 'package:registration/widgets/budget_widgets/transaction_list.dart';
-import '../../models/trancation_model.dart';
+import 'package:registration/widgets/budget_widgets/budget_list/transaction_list.dart';
+import '../../../models/trancation_model.dart';
 
 class TransactionListWidget extends StatefulWidget {
   final bool ready;

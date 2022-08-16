@@ -6,25 +6,25 @@ extension ExtensionCategory on TransactionCategory {
   String get transactionCategory {
     switch (this) {
       case (TransactionCategory.salariesDev):
-        return 'salariesDev';
+        return 'Salaries dev.';
       case (TransactionCategory.salariesMg):
-        return 'salariesMg';
+        return 'Salaries mg.';
       case (TransactionCategory.internalHr):
-        return 'internalHr';
+        return 'Internal HR';
       case (TransactionCategory.externalHr):
-        return 'externalHr';
+        return 'External HR';
       case (TransactionCategory.credit):
-        return 'credit';
+        return 'Credit';
       case (TransactionCategory.dividends):
-        return 'dividends';
+        return 'Dividends';
       case (TransactionCategory.bankCharges):
-        return 'bankCharges';
+        return 'Bank Charges';
       case (TransactionCategory.taxes):
-        return 'taxes';
+        return 'Taxes';
       case (TransactionCategory.awards):
-        return 'awards';
+        return 'Awards';
       case (TransactionCategory.others):
-        return 'others';
+        return 'Others';
     }
     return '';
   }

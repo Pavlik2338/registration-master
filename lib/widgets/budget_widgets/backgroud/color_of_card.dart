@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:registration/widgets/budget_widgets/background.dart';
+import 'package:registration/widgets/budget_widgets/backgroud/background.dart';
 
 class ColorOfCard extends StatelessWidget {
   final Color colorMinor;

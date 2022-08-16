@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/models/trancation_model.dart';
 import 'package:registration/repositories/login_repository.dart';
-import 'package:registration/widgets/budget_widgets/transaction_row.dart';
+import 'package:registration/widgets/budget_widgets/row/transaction_row.dart';
 
-import '../../models/user_model.dart';
+import '../../../models/user_model.dart';
 
 class TransactionRowWidget extends StatefulWidget {
   final bool ready;

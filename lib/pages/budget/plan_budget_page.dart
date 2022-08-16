@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../resources/constants/colors.dart';
-import '../widgets/budget_widgets/budget_page_widget.dart';
-import '../widgets/navigation_bar.dart';
-import 'add_lisiner.dart';
+import '../../resources/constants/colors.dart';
+import '../../widgets/budget_widgets/budget_page_widget.dart';
+import '../../widgets/navigation_bar.dart';
+import '../add_transaction/add_lisiner.dart';
 
-class FinishPlanBudget extends StatelessWidget {
+class PlanPage extends StatelessWidget {
+  const PlanPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class FinishPlanBudget extends StatelessWidget {
       ),
       body: BaseBudgetWidget(
         title: "Profit",
-        ready: true,
+        ready: false,
       ),
     );
   }

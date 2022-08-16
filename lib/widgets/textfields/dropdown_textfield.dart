@@ -10,36 +10,42 @@ import '../../resources/constants/enums.dart';
 class DropDownField extends StatefulWidget {
   final TextEditingController? controller;
   final List dropItem;
+  final String hint;
   final void Function(TransactionCategory) callback;
+   final TransactionCategory? startCategory;
   DropDownField(
-      {required this.dropItem, this.controller, required this.callback});
+      {required this.dropItem,
+      this.controller,
+      required this.callback,
+      this.hint = "Category",
+      this.startCategory});
   @override
   State<DropDownField> createState() => _DropDownFieldState();
 }
 
 class _DropDownFieldState extends State<DropDownField> {
-  String selectedValue = '';
+ late String selectedValue =widget.startCategory==null ? '': ExtensionCategory(widget.startCategory!).transactionCategory ;
   TransactionCategory func(String string) {
     switch (string) {
-      case ('salariesDev'):
+      case ('Salaries dev.'):
         return TransactionCategory.salariesDev;
-      case ('salariesMg'):
+      case ('Salaries mg.'):
         return TransactionCategory.salariesMg;
-      case ('internalHr'):
+      case ('Internal HR'):
         return TransactionCategory.internalHr;
-      case ('externalHr'):
+      case ('External HR'):
         return TransactionCategory.externalHr;
-      case ('credit'):
+      case ('Credit'):
         return TransactionCategory.credit;
-      case ('dividends'):
+      case ('Dividends'):
         return TransactionCategory.dividends;
-      case ('bankCharges'):
+      case ('Bank Charges'):
         return TransactionCategory.bankCharges;
-      case ('taxes'):
+      case ('Taxes'):
         return TransactionCategory.taxes;
-      case ('awards'):
+      case ('Awards'):
         return TransactionCategory.awards;
-      case ('others'):
+      case ('Others'):
         return TransactionCategory.others;
     }
     return TransactionCategory.others;
@@ -63,10 +69,10 @@ class _DropDownFieldState extends State<DropDownField> {
           ),
         ),
         isExpanded: true,
-        hint: const Text(
-          'Category',
-          style:
-              TextStyle(fontSize: 14, color: Color.fromRGBO(27, 27, 27, 0.5)),
+        hint: Text(
+          widget.hint,
+          style: const TextStyle(
+              fontSize: 14, color: Color.fromRGBO(27, 27, 27, 0.5)),
         ),
         icon: const Icon(
           Icons.arrow_drop_down,
@@ -95,11 +101,9 @@ class _DropDownFieldState extends State<DropDownField> {
           }
         },
         onChanged: (value) {
-          widget.callback(func(value.toString()));
-        },
-        onSaved: (value) {
+          print(value);
           selectedValue = value.toString();
-          widget.callback(func(value.toString()));
+          widget.callback(func(selectedValue));
         },
       ),
     );

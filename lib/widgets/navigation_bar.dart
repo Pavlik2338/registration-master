@@ -4,11 +4,11 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 
 import 'package:registration/pages/home_page.dart';
-import 'package:registration/pages/plan_budget_page.dart';
+import 'package:registration/pages/budget/plan_budget_page.dart';
 import 'package:registration/repositories/login_repository.dart';
 import 'package:registration/repositories/transaction_repository.dart';
 
-import '../pages/finish_budget_plan.dart';
+import '../pages/budget/finish_budget_plan.dart';
 import '../resources/constants/colors.dart';
 import '../resources/constants/enums.dart';
 

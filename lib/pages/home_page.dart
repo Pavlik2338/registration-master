@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:registration/pages/add_lisiner.dart';
+import 'package:registration/pages/add_transaction/add_lisiner.dart';
 import 'package:registration/resources/constants/colors.dart';
 import 'package:registration/widgets/appbar.dart';
 

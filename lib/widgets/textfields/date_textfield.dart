@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:registration/resources/constants/colors.dart';
+import 'package:registration/resources/validators/validators.dart';
 
 class DateTextField extends StatefulWidget {
   final void Function(DateTime) callback;
-  DateTextField({required this.callback});
+  final String? Function(String?)? validator;
+  DateTextField({Key? key,required this.callback, this.validator});
   @override
   State<DateTextField> createState() => _DateTextFieldState();
 }
@@ -23,9 +25,12 @@ class _DateTextFieldState extends State<DateTextField> {
     return SizedBox(
       height: 64.h,
       width: 328.w,
-      child: TextField(
+      child: TextFormField(
+        key:widget.key,
+        validator: widget.validator,
         controller: dateinput,
         decoration: InputDecoration(
+         
           label: const Text(
             "Date",
             style: TextStyle(
@@ -74,6 +79,7 @@ class _DateTextFieldState extends State<DateTextField> {
             setState(() {
               dateinput.text = formattedDate;
               widget.callback(pickedDate);
+              print(pickedDate);
             });
           } else {
             print("Date is not selected");

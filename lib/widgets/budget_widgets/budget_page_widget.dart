@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/repositories/transaction_repository.dart';
 import 'package:registration/resources/constants/colors.dart';
-import 'package:registration/widgets/budget_widgets/transaction_list.dart';
-import 'package:registration/widgets/budget_widgets/transaction_list_json.dart';
-import 'package:registration/widgets/budget_widgets/transaction_row.dart';
-import 'package:registration/widgets/budget_widgets/transaction_row_tojson.dart';
+import 'package:registration/widgets/budget_widgets/budget_list/transaction_list.dart';
+import 'package:registration/widgets/budget_widgets/budget_list/transaction_list_json.dart';
+import 'package:registration/widgets/budget_widgets/row/transaction_row.dart';
+import 'package:registration/widgets/budget_widgets/row/transaction_row_tojson.dart';
 
 import '../../../resources/theme/custom_theme.dart';
+import '../../blocs/trancation/trancation_bloc.dart';
 import '../../models/trancation_model.dart';
 import '../../models/user_model.dart';
 
@@ -74,7 +76,7 @@ class BaseBudgetWidget extends StatelessWidget {
                   builder: (context, AsyncSnapshot<dynamic> snapshot) {
                     return Text(
                         TransactionRepository()
-                            .resualtMoney(snap: snapshot)
+                            .resualtMoney(snap: snapshot,ready: ready)
                             .toString(),
                         style: CustomTheme.lightTheme.textTheme.headline1
                             ?.copyWith(color: Colors.white, fontSize: 32));
@@ -85,8 +87,11 @@ class BaseBudgetWidget extends StatelessWidget {
         ),
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 17.w),
-            child: TransactionListWidget(
-              ready: ready,
+            child: BlocProvider(
+              create: (context) => TrancationBloc(repository: TransactionRepository()),
+              child: TransactionListWidget(
+                ready: ready,
+              ),
             )),
       ],
     );
