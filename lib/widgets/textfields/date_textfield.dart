@@ -7,7 +7,9 @@ import 'package:registration/resources/validators/validators.dart';
 class DateTextField extends StatefulWidget {
   final void Function(DateTime) callback;
   final String? Function(String?)? validator;
-  DateTextField({Key? key,required this.callback, this.validator});
+  final TextEditingController? controller;
+  DateTextField(
+      {Key? key, required this.callback, this.validator, this.controller});
   @override
   State<DateTextField> createState() => _DateTextFieldState();
 }
@@ -16,7 +18,11 @@ class _DateTextFieldState extends State<DateTextField> {
   TextEditingController dateinput = TextEditingController();
   @override
   void initState() {
-    dateinput.text = "";
+    if (widget.controller == null) {
+      dateinput.text = '';
+    } else {
+      dateinput = widget.controller!;
+    }
     super.initState();
   }
 
@@ -26,11 +32,10 @@ class _DateTextFieldState extends State<DateTextField> {
       height: 64.h,
       width: 328.w,
       child: TextFormField(
-        key:widget.key,
+        key: widget.key,
         validator: widget.validator,
         controller: dateinput,
         decoration: InputDecoration(
-         
           label: const Text(
             "Date",
             style: TextStyle(
@@ -62,7 +67,7 @@ class _DateTextFieldState extends State<DateTextField> {
                       dialogBackgroundColor: purple,
                       textButtonTheme: TextButtonThemeData(
                         style: TextButton.styleFrom(
-                          primary: Colors.white, // button text color
+                          primary: Colors.white,
                         ),
                       )),
                   child: child!,
@@ -79,11 +84,8 @@ class _DateTextFieldState extends State<DateTextField> {
             setState(() {
               dateinput.text = formattedDate;
               widget.callback(pickedDate);
-              print(pickedDate);
             });
-          } else {
-            print("Date is not selected");
-          }
+          } else {}
           ;
         },
       ),

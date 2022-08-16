@@ -70,15 +70,16 @@ class TransactionListElem extends StatelessWidget {
                   : Colors.red),
         ),
         SizedBox(width: 29.w),
-        IconButton(
-          icon: const Icon(Icons.keyboard_arrow_right_rounded),
-          splashRadius: 5,
-          color: color,
-          onPressed: () {
-            ChooseDialog(context: context, transaction: transaction)
-                .showSimpleDialog();
-          },
-        )
+      IconButton(
+            icon: const Icon(Icons.keyboard_arrow_right_rounded),
+            splashRadius: 5,
+            color: color,
+            onPressed: () {
+              ChooseDialog(contexta: context, transaction: transaction)
+                  .showSimpleDialog();
+            },
+          ),
+      
       ]),
     );
   }

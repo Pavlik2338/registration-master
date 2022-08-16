@@ -43,6 +43,40 @@ class TransactionRepository {
     }
   }
 
+  Future<bool> editTransaction(
+      {required String id,
+      required String userName,
+      required TransactionType type,
+      required bool ready,
+      required DateTime date,
+      required TransactionCategory category,
+      required double value,
+      String? description}) async {
+    try {
+      final docTransaction = FirebaseFirestore.instance
+          .collection('users')
+          .doc(thisUser.username)
+          .collection('transactions')
+          .doc(id);
+
+      final transToJson = TransactionModel(
+              id: id,
+              type: type,
+              ready: ready,
+              date: date,
+              category: category,
+              value: value,
+              description: description)
+          .toJson();
+
+      docTransaction.set(transToJson);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      return false;
+    }
+  }
+
   double resualtMoney(
       {required AsyncSnapshot<dynamic> snap, required bool ready}) {
     double sum = 0;
@@ -67,9 +101,8 @@ class TransactionRepository {
           sum -= transaction.value;
         }
       }
-
-      
-    }return sum;
+    }
+    return sum;
   }
 
   Future<bool> changeReadiness({required TransactionModel transaction}) async {
@@ -85,5 +118,14 @@ class TransactionRepository {
     } on FirebaseAuthException catch (e) {
       return false;
     }
+  }
+
+  Future<void> delete({required TransactionModel transaction}) async {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(thisUser.username)
+        .collection('transactions')
+        .doc(transaction.id)
+        .delete();
   }
 }

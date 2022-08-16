@@ -13,13 +13,15 @@ class SwitchField extends StatefulWidget {
   final bool? type;
   final void Function(TransactionType)? saveType;
   final void Function(bool)? saveStatus;
+  final int index;
   SwitchField(
       {required this.firstLebel,
       required this.secondLebel,
       required this.switchTitle,
       this.saveType,
       this.saveStatus,
-      this.type});
+      this.type,
+      this.index=0});
   @override
   State<SwitchField> createState() => _SwitchFieldState();
 }
@@ -57,7 +59,7 @@ class _SwitchFieldState extends State<SwitchField> {
           activeFgColor: const Color.fromRGBO(138, 93, 165, 1),
           inactiveFgColor: const Color.fromRGBO(138, 93, 165, 1),
           inactiveBgColor: Colors.white,
-          initialLabelIndex: 1,
+          initialLabelIndex: widget.index,
           totalSwitches: 2,
           labels: [widget.firstLebel, widget.secondLebel],
           radiusStyle: true,

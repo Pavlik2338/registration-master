@@ -16,6 +16,8 @@ class TrancationBloc extends Bloc<TrancationEvent, TrancationState> {
   TrancationBloc({required this.repository}) : super(TrancationInitial()) {
     on<AddTrancationEvent>(_onAddTrancationEvent);
     on<ChangeReadinessEvent>(_onChangeReadiness);
+    on<DeleteTransactionEvent>(_onDeleteTransaction);
+    on<EditTrancationEvent>(_onEditTransaction);
   }
   void _onAddTrancationEvent(
     AddTrancationEvent event,
@@ -43,10 +45,42 @@ class TrancationBloc extends Bloc<TrancationEvent, TrancationState> {
     Emitter<TrancationState> emit,
   ) async {
     emit(TrancationLoading());
-    bool change =
-        await repository.changeReadiness(transaction: event.transaction);
+    bool change = await repository.changeReadiness(
+      transaction: event.transaction,
+    );
     if (change) {
       emit(TrancationSuccess());
+    }
+  }
+
+  void _onDeleteTransaction(
+    DeleteTransactionEvent event,
+    Emitter<TrancationState> emit,
+  ) async {
+    emit(TrancationLoading());
+    await repository.delete(
+      transaction: event.transaction,
+    );
+    emit(TrancationSuccess());
+  }
+
+  void _onEditTransaction(
+    EditTrancationEvent event,
+    Emitter<TrancationState> emit,
+  ) async {
+    emit(TrancationLoading());
+    bool transaction = await repository.editTransaction(
+        id: event.id!,
+        userName: thisUser.username!,
+        type: event.type,
+        ready: event.status,
+        date: event.date,
+        category: event.category,
+        value: event.value);
+    if (transaction) {
+      emit(TrancationSuccess());
+    } else {
+      emit(TrancationError());
     }
   }
 }
