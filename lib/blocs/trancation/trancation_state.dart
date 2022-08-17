@@ -9,6 +9,11 @@ abstract class TrancationState extends Equatable {
 
 class TrancationInitial extends TrancationState {}
 
+class TrancationFound extends TrancationState {
+  final Stream stream;
+  TrancationFound({required this.stream});
+}
+
 class TrancationLoading extends TrancationState {}
 
 class TrancationSuccess extends TrancationState {}

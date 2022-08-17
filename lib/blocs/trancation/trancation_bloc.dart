@@ -83,4 +83,14 @@ class TrancationBloc extends Bloc<TrancationEvent, TrancationState> {
       emit(TrancationError());
     }
   }
+
+  void _onFound(
+    FoundDateEvent event,
+    Emitter<TrancationState> emit,
+  ) async {
+    emit(TrancationLoading());
+    Stream? stream =
+        await repository.foundTransaction(month: event.month, year: event.year);
+    emit(TrancationFound(stream: stream!));
+  }
 }

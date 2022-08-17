@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/repositories/transaction_repository.dart';
-import 'package:registration/resources/constants/colors.dart';
-import 'package:registration/widgets/budget_widgets/budget_list/transaction_list.dart';
 import 'package:registration/widgets/budget_widgets/budget_list/transaction_list_json.dart';
-import 'package:registration/widgets/budget_widgets/row/transaction_row.dart';
+import 'package:registration/widgets/budget_widgets/month_view.dart';
 import 'package:registration/widgets/budget_widgets/row/transaction_row_tojson.dart';
 
 import '../../../resources/theme/custom_theme.dart';
 import '../../blocs/trancation/trancation_bloc.dart';
-import '../../models/trancation_model.dart';
 import '../../models/user_model.dart';
 
 class BaseBudgetWidget extends StatelessWidget {
@@ -47,25 +44,8 @@ class BaseBudgetWidget extends StatelessWidget {
               ),
             ),
             child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        print('object');
-                      },
-                      icon: Icon(Icons.arrow_left)),
-                  Text(mounth,
-                      style: CustomTheme.lightTheme.textTheme.headline1
-                          ?.copyWith(color: Colors.white)),
-                  IconButton(
-                      iconSize: 20,
-                      onPressed: () {
-                        print('object');
-                      },
-                      icon: const Icon(Icons.arrow_right)),
-                ],
-              ),
+             
+             const MonthView(),
               Text(title, style: CustomTheme.lightTheme.textTheme.headline1),
               StreamBuilder<Object>(
                   stream: FirebaseFirestore.instance

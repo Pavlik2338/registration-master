@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:registration/models/transaction_category.dart';
 import 'package:registration/models/user_model.dart';
@@ -40,6 +41,27 @@ class TransactionRepository {
     } on FirebaseAuthException catch (e) {
       print(e.message);
       return false;
+    }
+  }
+
+  Future<Stream?> foundTransaction({
+    required int month,
+    required int year,
+  }) async {
+    DateTime date = DateTime(year, month, 1);
+    bool success = false;
+    try {
+      final allDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(thisUser.username)
+          .collection('transactions')
+          .where('date', isGreaterThanOrEqualTo: date)
+          .snapshots();
+      success = true;
+      return allDoc;
+    } on FirebaseAuthException catch (e) {
+      success = false;
+      return null;
     }
   }
 
