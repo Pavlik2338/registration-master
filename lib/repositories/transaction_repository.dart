@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:registration/models/transaction_category.dart';
 import 'package:registration/models/user_model.dart';
 import 'package:registration/repositories/login_repository.dart';
 import 'dart:async';
+import '../models/month_year_model.dart';
 import '../models/trancation_model.dart';
 import '../resources/constants/enums.dart';
 
@@ -74,6 +76,7 @@ class TransactionRepository {
       required TransactionCategory category,
       required double value,
       String? description}) async {
+    bool success = false;
     try {
       final docTransaction = FirebaseFirestore.instance
           .collection('users')
@@ -92,21 +95,19 @@ class TransactionRepository {
           .toJson();
 
       docTransaction.set(transToJson);
-      return true;
+      return success = true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
-      return false;
+      return    success = false;
     }
   }
 
-  double resualtMoney(
-      {required AsyncSnapshot<dynamic> snap, required bool ready}) {
+  double resualtMoney2(
+      {required List<TransactionModel> list, required bool ready}) {
     double sum = 0;
     if (ready) {
-      for (var elem in snap.data!.docs
-          .map((DocumentSnapshot doc) => doc.data()! as Map<String, dynamic>)
-          .where((elem) => elem['ready'] == true)) {
-        var transaction = TransactionModel.fromJson(elem);
+      for (var elem in list.where((elem) => elem.ready == true)) {
+        var transaction = elem;
         if (transaction.type == TransactionType.profit) {
           sum += transaction.value;
         } else {
@@ -114,9 +115,8 @@ class TransactionRepository {
         }
       }
     } else {
-      for (var elem in snap.data!.docs
-          .map((DocumentSnapshot doc) => doc.data()! as Map<String, dynamic>)) {
-        var transaction = TransactionModel.fromJson(elem);
+      for (var elem in list) {
+        var transaction = elem;
         if (transaction.type == TransactionType.profit) {
           sum += transaction.value;
         } else {
@@ -128,6 +128,7 @@ class TransactionRepository {
   }
 
   Future<bool> changeReadiness({required TransactionModel transaction}) async {
+    bool success = false;
     try {
       transaction.ready = !transaction.ready;
       final docChange = FirebaseFirestore.instance
@@ -136,9 +137,9 @@ class TransactionRepository {
           .collection('transactions')
           .doc(transaction.id);
       docChange.set(transaction.toJson());
-      return true;
+      return success = true;
     } on FirebaseAuthException catch (e) {
-      return false;
+      return success=false;
     }
   }
 
@@ -149,5 +150,33 @@ class TransactionRepository {
         .collection('transactions')
         .doc(transaction.id)
         .delete();
+  }
+
+  bool compareDate(DateTime date, MonthYear selectedDate) {
+    if (date.year == selectedDate.year) {
+      if (date.month == selectedDate.month) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  List<FlSpot> spotsGrafic({required List<TransactionModel> tranc}) {
+    List<FlSpot> spots = [];
+    List<double> sumOfMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (var transaction in tranc.where((element) => element.ready == true)) {
+      if (transaction.type == TransactionType.profit) {
+        sumOfMonth[transaction.date.month - 1] += transaction.value;
+      } else {
+        sumOfMonth[transaction.date.month - 1] -= transaction.value;
+      }
+    }
+    for (int i = 0; i < 12; i++) {
+      spots.add(FlSpot(i.toDouble(), sumOfMonth[i] / 10000));
+    }
+    return spots;
   }
 }

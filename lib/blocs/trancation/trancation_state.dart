@@ -9,13 +9,17 @@ abstract class TrancationState extends Equatable {
 
 class TrancationInitial extends TrancationState {}
 
-class TrancationFound extends TrancationState {
-  final Stream stream;
-  TrancationFound({required this.stream});
-}
+
 
 class TrancationLoading extends TrancationState {}
 
 class TrancationSuccess extends TrancationState {}
 
 class TrancationError extends TrancationState {}
+class FetchLoadingState extends TrancationState {}
+
+class FetchState extends TrancationState {
+  final List<TransactionModel> transactions;
+
+  const FetchState(this.transactions);
+}

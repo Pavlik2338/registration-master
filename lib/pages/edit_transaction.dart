@@ -170,7 +170,8 @@ void saveType(TransactionType newType) {
                 padding: const EdgeInsets.symmetric(vertical: 22),
                 child: MainButtonDark(
                   name: 'Edit',
-                  onPressed: () {
+                  onPressed: () { 
+                      Navigator.pop(context);
                     context.read<TrancationBloc>().add(EditTrancationEvent(
                         id: id,
                         status: currentStatus,

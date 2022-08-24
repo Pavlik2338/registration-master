@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:registration/blocs/trancation/trancation_bloc.dart';
 
 import '../../models/month_year_model.dart';
 import '../../resources/theme/custom_theme.dart';
@@ -29,6 +31,8 @@ class MonthViewState extends State<MonthView> {
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.bounceInOut);
               monthYear -= 2;
+              BlocProvider.of<TrancationBloc>(context)
+                  .add(DateChanged(newDate: monthYear));
             },
             icon: const Icon(
               Icons.keyboard_arrow_left_outlined,
@@ -47,12 +51,13 @@ class MonthViewState extends State<MonthView> {
                 }
                 pageChanged = index;
               });
+                   BlocProvider.of<TrancationBloc>(context)
+                  .add(DateChanged(newDate: monthYear));
             },
             itemBuilder: (context, index) {
               return Text(monthYear.toString(),
                   textAlign: TextAlign.center,
-                  style: CustomTheme.lightTheme.textTheme.headline1
-                      ?.copyWith(color: Colors.white));
+                  style:const TextStyle(color:Colors.white,fontFamily: "Nunito",fontWeight: FontWeight.w700,fontSize: 15.5 ));
             },
           ),
         ),
@@ -61,7 +66,6 @@ class MonthViewState extends State<MonthView> {
               pageController.animateToPage(++pageChanged,
                   duration: const Duration(milliseconds: 250),
                   curve: Curves.bounceInOut);
-          //   monthYear += 1;
             },
             icon: const Icon(
               Icons.keyboard_arrow_right_outlined,

@@ -37,8 +37,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
   bool? status = false;
   DateTime? date;
   TransactionCategory category = TransactionCategory.awards;
-  final _formKeyDate = GlobalKey<FormState>();
-  final _formKeyMoney = GlobalKey<FormState>();
+
   void saveType(TransactionType newType) {
     type = newType;
   }
@@ -117,7 +116,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: DateTextField(
-                  key: _formKeyDate,
+          
                   callback: saveDate,
                   validator: (text) =>
                       Validators().validateRequiredFields(text),
@@ -128,7 +127,6 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
                 callback: saveCategory,
               ),
               MoneyField(
-                key: _formKeyMoney,
                 nameField: "Enter Amount",
                 controller: valueController,
                 validator: (text) => Validators().validateMoney(text),
@@ -143,8 +141,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
                 child: MainButtonDark(
                     name: 'Add',
                     onPressed: () {
-                      if (_formKeyDate.currentState!.validate() &
-                          _formKeyMoney.currentState!.validate()) {
+              
                         context.read<TrancationBloc>().add(
                               AddTrancationEvent(
                                   type: type!,
@@ -155,7 +152,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
                                       double.parse(valueController.text.trim()),
                                   description: description.text),
                             );
-                      }
+                      
                     }),
               )
             ],

@@ -43,11 +43,7 @@ class EditTrancationEvent extends TrancationEvent {
       this.description = ''});
 }
 
-class FoundDateEvent extends TrancationEvent {
-  final int month;
-  final int year;
-  FoundDateEvent({required this.month,required this.year});
-}
+
 
 class ChangeReadinessEvent extends TrancationEvent {
   final TransactionModel transaction;
@@ -57,4 +53,12 @@ class ChangeReadinessEvent extends TrancationEvent {
 class DeleteTransactionEvent extends TrancationEvent {
   final TransactionModel transaction;
   DeleteTransactionEvent({required this.transaction});
+}
+class FetchEvent extends TrancationEvent{
+
+}
+class DateChanged extends TrancationEvent {
+  final MonthYear newDate;
+
+  const DateChanged({required this.newDate});
 }

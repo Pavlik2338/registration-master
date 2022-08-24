@@ -1,16 +1,11 @@
 // ignore: depend_on_referenced_packages
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:registration/pages/grafic_page.dart';
 import 'package:registration/pages/home_page.dart';
 import 'package:registration/pages/budget/plan_budget_page.dart';
-import 'package:registration/repositories/login_repository.dart';
-import 'package:registration/repositories/transaction_repository.dart';
-
 import '../pages/budget/finish_budget_plan.dart';
 import '../resources/constants/colors.dart';
-import '../resources/constants/enums.dart';
 
 class FloatingNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -44,6 +39,10 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
     if (index == 2) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => FinishPlanBudget()));
+    }
+      if (index == 3) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => GraficPAge()));
     }
   }
 

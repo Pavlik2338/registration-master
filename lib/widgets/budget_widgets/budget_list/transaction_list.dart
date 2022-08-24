@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:registration/models/transaction_category.dart';
-
-import 'package:registration/resources/constants/path_images.dart';
 import 'package:registration/widgets/budget_widgets/dialog_window.dart';
 import '../../../blocs/trancation/trancation_bloc.dart';
 import '../../../models/trancation_model.dart';

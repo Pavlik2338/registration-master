@@ -34,10 +34,13 @@ class DescriptionField extends StatelessWidget {
               child: Text(nameField),
             ),
           ),
+
+        
           labelStyle: CustomTheme.lightTheme.textTheme.labelMedium,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           focusedBorder: OutlineInputBorder(
+            
             borderSide: const BorderSide(color: purple),
             borderRadius: BorderRadius.circular(10),
           ),

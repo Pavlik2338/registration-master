@@ -6,6 +6,7 @@ import 'package:registration/repositories/transaction_repository.dart';
 import 'package:registration/widgets/budget_widgets/budget_list/transaction_list_json.dart';
 import 'package:registration/widgets/budget_widgets/month_view.dart';
 import 'package:registration/widgets/budget_widgets/row/transaction_row_tojson.dart';
+import 'package:registration/widgets/budget_widgets/top_widget.dart';
 
 import '../../../resources/theme/custom_theme.dart';
 import '../../blocs/trancation/trancation_bloc.dart';
@@ -25,55 +26,24 @@ class BaseBudgetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-            height: 144.h,
-            width: 363.w,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(60.0),
-                  bottomLeft: Radius.circular(60.0)),
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromRGBO(138, 93, 165, 1),
-                  Color.fromRGBO(25, 152, 207, 1),
-                ],
-                begin: Alignment.center,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-             
-             const MonthView(),
-              Text(title, style: CustomTheme.lightTheme.textTheme.headline1),
-              StreamBuilder<Object>(
-                  stream: FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(thisUser.username)
-                      .collection('transactions')
-                      .snapshots(),
-                  builder: (context, AsyncSnapshot<dynamic> snapshot) {
-                    return Text(
-                        TransactionRepository()
-                            .resualtMoney(snap: snapshot,ready: ready)
-                            .toString(),
-                        style: CustomTheme.lightTheme.textTheme.headline1
-                            ?.copyWith(color: Colors.white, fontSize: 32));
-                  }),
-            ])),
-        TransactionRowWidget(
-          ready: ready,
-        ),
-        Padding(
+    return BlocProvider(
+      create: (context) => TrancationBloc(repository: TransactionRepository())
+        ..add(FetchEvent()),
+      child: Column(
+        children: [
+      
+          TopWidget(ready: ready, title: title),
+          TransactionRowWidget(
+            ready: ready,
+          ),
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 17.w),
-            child: BlocProvider(
-              create: (context) => TrancationBloc(repository: TransactionRepository()),
-              child: TransactionListWidget(
-                ready: ready,
-              ),
-            )),
-      ],
+            child: TransactionListWidget(
+              ready: ready,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

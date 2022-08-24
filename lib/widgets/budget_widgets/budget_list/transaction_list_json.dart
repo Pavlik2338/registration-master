@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:registration/blocs/trancation/trancation_bloc.dart';
 import 'package:registration/models/user_model.dart';
 import 'package:registration/widgets/budget_widgets/budget_list/transaction_list.dart';
 import '../../../models/trancation_model.dart';
@@ -19,34 +22,30 @@ class TransactionListWidgetState extends State<TransactionListWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
         height: 360.h,
-        child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('users')
-                .doc(thisUser.username)
-                .collection('transactions')
-                .snapshots(),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (!snapshot.hasData) {
-                return const Text("Empty");
-              }
-              return ListView(
+        child: BlocBuilder<TrancationBloc,TrancationState>(
+          builder: (context,state){
+            if(state is FetchLoadingState){
+              return const Center(child: CircularProgressIndicator(),);
+            }
+            if(state is FetchState){
+             return ListView(
                 padding: EdgeInsets.only(top: 24.h, bottom: 18.h),
                 children: [
                   if (widget.ready)
-                    for (var elem in snapshot.data!.docs
-                        .map((DocumentSnapshot doc) =>
-                            doc.data()! as Map<String, dynamic>)
-                        .where((elem) => elem['ready'] == true))
+                    for (var elem in state.transactions
+                        .where((elem) => elem.ready == true))
                       TransactionListElem(
-                          transaction: TransactionModel.fromJson(elem))
+                          transaction: elem)
                   else
-                    for (var elem in snapshot.data!.docs.map(
-                        (DocumentSnapshot doc) =>
-                            doc.data()! as Map<String, dynamic>))
-                      TransactionListElem(
-                          transaction: TransactionModel.fromJson(elem))
+                     for (var elem in state.transactions)
+                    TransactionListElem(transaction: elem)
                 ],
               );
-            }));
+            }
+             return const Text("Nothing here...");
+          },
+        ));
+        
+            }
   }
-}
+
