@@ -16,3 +16,4 @@ class LoginSubmitted extends LoginEvent {
 class LoginGoogleClick extends LoginEvent {
   const LoginGoogleClick();
 }
+

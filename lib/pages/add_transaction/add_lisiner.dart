@@ -6,11 +6,13 @@ import '../../blocs/trancation/trancation_bloc.dart';
 import '../../repositories/transaction_repository.dart';
 
 class AddTransactionPage extends StatelessWidget {
+  const AddTransactionPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TrancationBloc(repository: TransactionRepository()),
-      child: AddTrancationLisiner(),
+      create: (context) => TransactionBloc(repository: TransactionRepository()),
+      child: const AddTrancationLisiner(),
     );
   }
 }

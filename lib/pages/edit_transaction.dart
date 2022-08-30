@@ -7,7 +7,7 @@ import 'package:registration/widgets/buttons/main_button.dart';
 import 'package:registration/widgets/buttons/switch_field.dart';
 import 'package:registration/models/transaction_category.dart';
 import '../resources/constants/enums.dart';
-import '../resources/validators/validators.dart';
+
 import '../widgets/textfields/date_textfield.dart';
 import '../widgets/textfields/description.dart';
 import '../widgets/textfields/dropdown_textfield.dart';
@@ -30,14 +30,14 @@ class EditTransaction extends StatelessWidget {
       required this.category,
       required this.date,
       this.description});
-late DateTime currectDate=date ;
-late  bool currentStatus= status;
-   late double currentValue=value;
-   late String? currentDescription=description;
-   late TransactionType currentType=type ;
-   late TransactionCategory currentCategory =category;
+  late DateTime currectDate = date;
+  late bool currentStatus = status;
+  late double currentValue = value;
+  late String? currentDescription = description;
+  late TransactionType currentType = type;
+  late TransactionCategory currentCategory = category;
 
-void saveType(TransactionType newType) {
+  void saveType(TransactionType newType) {
     currentType = newType;
   }
 
@@ -52,7 +52,6 @@ void saveType(TransactionType newType) {
   saveCategory(TransactionCategory newCategory) {
     currentCategory = newCategory;
   }
-
 
   List<String> dropItem = [
     ExtensionCategory(TransactionCategory.salariesMg).transactionCategory,
@@ -81,13 +80,12 @@ void saveType(TransactionType newType) {
 
   @override
   Widget build(BuildContext context) {
-   
     moneyController.text = value.toString();
     descriptionController.text = description.toString();
     dateController.text = DateFormat('yyyy-MM-dd').format(date);
-    return BlocListener<TrancationBloc, TrancationState>(
+    return BlocListener<TransactionBloc, TransactionState>(
       listener: (context, state) {
-         if (state is TrancationLoading) {
+        if (state is TrancationLoading) {
           Navigator.pushNamed(context, '/splash');
         }
         if (state is TrancationError) {
@@ -134,7 +132,7 @@ void saveType(TransactionType newType) {
                 secondLebel: 'Loss',
                 switchTitle: 'Transaction Type',
                 index: indexChange(type),
-                saveType:saveType ,
+                saveType: saveType,
               ),
               SwitchField(
                 firstLebel: 'OK',
@@ -146,7 +144,6 @@ void saveType(TransactionType newType) {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: DateTextField(
-                  
                   callback: saveDate,
                   controller: dateController,
                 ),
@@ -170,9 +167,9 @@ void saveType(TransactionType newType) {
                 padding: const EdgeInsets.symmetric(vertical: 22),
                 child: MainButtonDark(
                   name: 'Edit',
-                  onPressed: () { 
-                      Navigator.pop(context);
-                    context.read<TrancationBloc>().add(EditTrancationEvent(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                    context.read<TransactionBloc>().add(EditTrancationEvent(
                         id: id,
                         status: currentStatus,
                         value: double.parse(moneyController.text.trim()),

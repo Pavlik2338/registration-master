@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:registration/models/transaction_category.dart';
 import 'package:registration/models/user_model.dart';
-import 'package:registration/repositories/login_repository.dart';
+import 'package:registration/resources/validators/scale_of_grafic.dart';
 import 'dart:async';
 import '../models/month_year_model.dart';
 import '../models/trancation_model.dart';
 import '../resources/constants/enums.dart';
+
+int scale = 10000;
 
 class TransactionRepository {
   Future<bool> addTransaction(
@@ -98,7 +97,7 @@ class TransactionRepository {
       return success = true;
     } on FirebaseAuthException catch (e) {
       print(e.message);
-      return    success = false;
+      return success = false;
     }
   }
 
@@ -139,7 +138,7 @@ class TransactionRepository {
       docChange.set(transaction.toJson());
       return success = true;
     } on FirebaseAuthException catch (e) {
-      return success=false;
+      return success = false;
     }
   }
 
@@ -164,9 +163,19 @@ class TransactionRepository {
     }
   }
 
+  bool fieldsFill(
+      double? value, DateTime? date, TransactionCategory? category) {
+    if (value == null && date == null && category == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   List<FlSpot> spotsGrafic({required List<TransactionModel> tranc}) {
     List<FlSpot> spots = [];
     List<double> sumOfMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    double maxSum = 0;
     for (var transaction in tranc.where((element) => element.ready == true)) {
       if (transaction.type == TransactionType.profit) {
         sumOfMonth[transaction.date.month - 1] += transaction.value;
@@ -175,8 +184,19 @@ class TransactionRepository {
       }
     }
     for (int i = 0; i < 12; i++) {
-      spots.add(FlSpot(i.toDouble(), sumOfMonth[i] / 10000));
+      if (sumOfMonth[i] > maxSum) {
+        maxSum = sumOfMonth[i];
+      }
     }
+    int divide = Scale().chooseScale(maxSum);
+    scale = divide;
+    for (int i = 0; i < 12; i++) {
+      spots.add(FlSpot(
+        i.toDouble(),
+        sumOfMonth[i] / (divide / 10),
+      ));
+    }
+    print(maxSum);
     return spots;
   }
 }

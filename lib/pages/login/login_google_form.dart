@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:registration/resources/constants/path_images.dart';
 import 'package:registration/widgets/buttons/google_button.dart';
 
 import '../../blocs/login/bloc/login_bloc.dart';
-
 
 class LoginGoogleWidget extends StatelessWidget {
   const LoginGoogleWidget({Key? key}) : super(key: key);
@@ -17,8 +17,11 @@ class LoginGoogleWidget extends StatelessWidget {
             Navigator.pushNamed(context, '/home');
           }
         },
-        child: GoogleButton(
-          onPressed: () => context.read<LoginBloc>().add(const LoginGoogleClick()),
+        child: NetworkButton(
+          image: Image.asset(google),
+          title: 'Sign in with Google',
+          onPressed: () =>
+              context.read<LoginBloc>().add(const LoginGoogleClick()),
         ));
   }
 }

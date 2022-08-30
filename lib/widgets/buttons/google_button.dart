@@ -3,10 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../resources/theme/custom_theme.dart';
 
-class GoogleButton extends StatelessWidget {
+class NetworkButton extends StatelessWidget {
+  final String title;
+  final Image image;
   final Function()? onPressed;
   // ignore: use_key_in_widget_constructors
-  const GoogleButton({this.onPressed});
+  const NetworkButton(
+      {this.onPressed, required this.image, required this.title});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,12 +36,13 @@ class GoogleButton extends StatelessWidget {
                   padding: EdgeInsets.only(left: 16.w),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: SizedBox(height: 40, width: 40, child: Image.asset("assets/images/google1.png")),
+                    child: SizedBox(height: 40, width: 40, child: image),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: 80.w),
-                  child:  Text('Sign in with Google', style: CustomTheme.lightTheme.textTheme.button),
+                  child: Text(title,
+                      style: CustomTheme.lightTheme.textTheme.button),
                 )
               ],
             )),

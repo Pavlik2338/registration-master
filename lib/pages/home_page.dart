@@ -2,12 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:registration/models/user_model.dart';
 import 'package:registration/pages/add_transaction/add_lisiner.dart';
 import 'package:registration/resources/constants/colors.dart';
 import 'package:registration/widgets/appbar.dart';
 
 import '../resources/constants/path_images.dart';
-import '../widgets/navigation_bar.dart';
+import '../widgets/navigation_bar/navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -45,7 +46,11 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             SizedBox(
                 width: 250.w, height: 250.h, child: Image.asset(logo_mobyte)),
-            Text(user.email!),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(thisUser.email!,style:const TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),
+            ),
+            Text(thisUser.username!,style:const TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 70.h),
               child: Container(

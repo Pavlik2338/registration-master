@@ -15,6 +15,8 @@ import '../../widgets/textfields/description.dart';
 import '../../widgets/textfields/dropdown_textfield.dart';
 
 class AddTrancationLisiner extends StatefulWidget {
+  const AddTrancationLisiner({Key? key}) : super(key: key);
+
   @override
   State<AddTrancationLisiner> createState() => AddTrancationLisinerState();
 }
@@ -37,6 +39,12 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
   bool? status = false;
   DateTime? date;
   TransactionCategory category = TransactionCategory.awards;
+  bool vision = false;
+  // bool validate() {
+  //   if (valueController.text != null && date != null) {
+  //     return vision = true;
+  //   } else{return vision;}
+  // }
 
   void saveType(TransactionType newType) {
     type = newType;
@@ -56,7 +64,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<TrancationBloc, TrancationState>(
+    return BlocListener<TransactionBloc, TransactionState>(
       listener: (context, state) {
         if (state is TrancationLoading) {
           Navigator.pushNamed(context, '/splash');
@@ -116,7 +124,6 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: DateTextField(
-          
                   callback: saveDate,
                   validator: (text) =>
                       Validators().validateRequiredFields(text),
@@ -138,11 +145,18 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 22),
-                child: MainButtonDark(
-                    name: 'Add',
-                    onPressed: () {
-              
-                        context.read<TrancationBloc>().add(
+                child: BlocListener<TransactionBloc, TransactionState>(
+                  listener: (context, state) {
+                    if (state is FillFields) {
+                      setState(() {
+                        vision = state.success;
+                      });
+                    }
+                  },
+                  child: MainButtonDark(
+                      name: 'Add',
+                      onPressed: () {
+                        context.read<TransactionBloc>().add(
                               AddTrancationEvent(
                                   type: type!,
                                   category: category,
@@ -152,8 +166,8 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
                                       double.parse(valueController.text.trim()),
                                   description: description.text),
                             );
-                      
-                    }),
+                      }),
+                ),
               )
             ],
           ),

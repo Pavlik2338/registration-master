@@ -1,24 +1,28 @@
 part of 'trancation_bloc.dart';
 
-abstract class TrancationState extends Equatable {
-  const TrancationState();
+abstract class TransactionState extends Equatable {
+  const TransactionState();
 
   @override
   List<Object> get props => [];
 }
 
-class TrancationInitial extends TrancationState {}
+class TrancationInitial extends TransactionState {}
 
+class FillFields extends TransactionState {
+  final bool success;
+ const FillFields({required this.success});
+}
 
+class TrancationLoading extends TransactionState {}
 
-class TrancationLoading extends TrancationState {}
+class TrancationSuccess extends TransactionState {}
 
-class TrancationSuccess extends TrancationState {}
+class TrancationError extends TransactionState {}
 
-class TrancationError extends TrancationState {}
-class FetchLoadingState extends TrancationState {}
+class FetchLoadingState extends TransactionState {}
 
-class FetchState extends TrancationState {
+class FetchState extends TransactionState {
   final List<TransactionModel> transactions;
 
   const FetchState(this.transactions);

@@ -1,4 +1,4 @@
-import 'package:registration/models/trancation_model.dart';
+
 
 import '../resources/constants/enums.dart';
 

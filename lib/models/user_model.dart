@@ -1,12 +1,6 @@
-enum StateUserLogged {
-  isLogged,
-  unLogged,
-}
 
-enum StateUserRegistered {
-  isRegistered,
-  unRegistered,
-}
+
+import '../resources/constants/enums.dart';
 
 class UserModel {
   String? username;

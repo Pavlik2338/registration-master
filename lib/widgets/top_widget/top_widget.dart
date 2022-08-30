@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
+import 'package:registration/resources/constants/enums.dart';
+import 'package:registration/widgets/top_widget/year_view.dart';
 
 import '../../repositories/transaction_repository.dart';
 import '../../resources/theme/custom_theme.dart';
@@ -10,7 +12,16 @@ import 'month_view.dart';
 class TopWidget extends StatelessWidget {
   final String title;
   final bool ready;
-  TopWidget({required this.ready, required this.title});
+  final TopWidgetType topWidgetType;
+  TopWidget(
+      {required this.ready, required this.title, required this.topWidgetType});
+  String titleOfWidget(double sum) {
+    if (sum < 0) {
+      return 'Loss';
+    } else {
+      return 'Profit';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +44,26 @@ class TopWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const MonthView(),
-          Text(title, style: CustomTheme.lightTheme.textTheme.headline1),
-          BlocBuilder<TrancationBloc, TrancationState>(
+          (topWidgetType == TopWidgetType.month)
+              ? const MonthView()
+              : const YearView(),
+          BlocBuilder<TransactionBloc, TransactionState>(
             builder: (context, state) {
               if (state is FetchState) {
-                return Text(
-                  TransactionRepository()
-                      .resualtMoney2(list: state.transactions, ready: ready)
-                      .toString(),
-                  style: CustomTheme.lightTheme.textTheme.headline1
-                      ?.copyWith(color: Colors.white, fontSize: 32),
+                return Column(
+                  children: [
+                    Text(
+                        titleOfWidget(TransactionRepository().resualtMoney2(
+                            list: state.transactions, ready: ready)),
+                        style: CustomTheme.lightTheme.textTheme.headline1),
+                    Text(
+                      TransactionRepository()
+                          .resualtMoney2(list: state.transactions, ready: ready)
+                          .toString(),
+                      style: CustomTheme.lightTheme.textTheme.headline1
+                          ?.copyWith(color: Colors.white, fontSize: 32),
+                    ),
+                  ],
                 );
               }
               return const Text("You haven't transaction on this month");

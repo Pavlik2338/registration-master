@@ -4,6 +4,7 @@ import 'package:registration/models/user_model.dart';
 import 'package:registration/repositories/login_google_repository.dart';
 
 import '../../../repositories/abstract_repository.dart';
+import '../../../resources/constants/enums.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/pages/login/login_form.dart';
 import 'package:registration/pages/login/login_google_form.dart';
 import 'package:registration/repositories/login_google_repository.dart';
+import 'package:registration/widgets/buttons/google_button.dart';
 import 'package:registration/widgets/login_page_divider.dart';
 import '../../../widgets/appbar.dart';
 import '../../blocs/login/bloc/login_bloc.dart';
@@ -44,7 +45,11 @@ class LoginPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: LoginPageDivider(),
             ),
-            const LoginGoogleWidget()
+            const LoginGoogleWidget(),
+             Padding(
+               padding: const EdgeInsets.symmetric(vertical:8),
+               child: NetworkButton(image:Image.asset(apple) , title: 'Sign in with Apple'),
+             )
           ]),
         ),
       ),

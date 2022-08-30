@@ -21,31 +21,30 @@ class TransactionListWidgetState extends State<TransactionListWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: 360.h,
-        child: BlocBuilder<TrancationBloc,TrancationState>(
-          builder: (context,state){
-            if(state is FetchLoadingState){
-              return const Center(child: CircularProgressIndicator(),);
+        height: 400.h,
+        child: BlocBuilder<TransactionBloc, TransactionState>(
+          builder: (context, state) {
+            if (state is FetchLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             }
-            if(state is FetchState){
-             return ListView(
+            if (state is FetchState) {
+              return ListView(
                 padding: EdgeInsets.only(top: 24.h, bottom: 18.h),
                 children: [
                   if (widget.ready)
                     for (var elem in state.transactions
                         .where((elem) => elem.ready == true))
-                      TransactionListElem(
-                          transaction: elem)
+                      TransactionListElem(transaction: elem)
                   else
-                     for (var elem in state.transactions)
-                    TransactionListElem(transaction: elem)
+                    for (var elem in state.transactions)
+                      TransactionListElem(transaction: elem)
                 ],
               );
             }
-             return const Text("Nothing here...");
+            return const Text("Nothing here...");
           },
         ));
-        
-            }
   }
-
+}

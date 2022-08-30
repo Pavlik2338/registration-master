@@ -65,6 +65,7 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
             } else {
               return "Passwords don't match";
             }
+          
           },
           onChanged: (String str) {},
           nameField: 'Confirm password',
@@ -83,16 +84,11 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
         },
         child: MainButtonDark(
             name: "Register",
-            onPressed: () {
-              if (_formKeyUsername.currentState!.validate() &
-                  _formKeyPassword.currentState!.validate() &
-                  _formKeyEmail.currentState!.validate() &
-                  _formKeyPasswordAgain.currentState!.validate()) {
+            onPressed: () {    
                 context.read<RegistrationBloc>().add(RegistrationSubmitted(
                     username: _usernameController.text.trim(),
                     email: _emailController.text.trim(),
                     password: _passwordController.text.trim()));
-              }
             }),
       ),
     ]);

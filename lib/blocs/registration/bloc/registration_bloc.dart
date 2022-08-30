@@ -1,7 +1,9 @@
-import 'package:bloc/bloc.dart';
+
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration/repositories/abstract_repository.dart';
 import '../../../models/user_model.dart';
+import '../../../resources/constants/enums.dart';
 
 
 part 'registration_event.dart';

@@ -7,67 +7,80 @@ import '../../../blocs/trancation/trancation_bloc.dart';
 import '../../../models/trancation_model.dart';
 import '../../../resources/constants/enums.dart';
 import '../../../resources/theme/custom_theme.dart';
+import '../description_dialog.dart';
 
 class TransactionListElem extends StatelessWidget {
   final TransactionModel transaction;
   const TransactionListElem({Key? key, required this.transaction})
       : super(key: key);
+  String sumWithMinus(double value, TransactionType type) {
+    if (type == TransactionType.loss) {
+      return "-$value";
+    } else {
+      return "+$value";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final color = transaction.getColorTitle();
     return Container(
       margin: EdgeInsets.only(top: 11.h),
-      child: Row(children: [
-        BlocListener<TrancationBloc, TrancationState>(
-          listener: (context, state) {},
-          child: Container(
-            height: 48.h,
-            width: 48.w,
-            decoration: BoxDecoration(
-              color: color,
-              shape: BoxShape.circle,
-            ),
-            child: InkWell(
-              onTap: () {
-                context
-                    .read<TrancationBloc>()
-                    .add(ChangeReadinessEvent(transaction: transaction));
-              },
-              child: transaction.ready
-                  ? SizedBox(
-                      height: 24.h,
-                      width: 24.w,
-                      child: Image.asset('assets/images/ok.png'),
-                    )
-                  : Container(),
+      child: GestureDetector(
+        onDoubleTap: () {
+          DiscriptionDialog(contexta: context, transaction: transaction)
+              .dialog();
+        },
+        child: Row(children: [
+          BlocListener<TransactionBloc, TransactionState>(
+            listener: (context, state) {},
+            child: Container(
+              height: 48.h,
+              width: 48.w,
+              decoration: BoxDecoration(
+                color: color,
+                shape: BoxShape.circle,
+              ),
+              child: InkWell(
+                onTap: () {
+                  context
+                      .read<TransactionBloc>()
+                      .add(ChangeReadinessEvent(transaction: transaction));
+                },
+                child: transaction.ready
+                    ? SizedBox(
+                        height: 24.h,
+                        width: 24.w,
+                        child: Image.asset('assets/images/ok.png'),
+                      )
+                    : Container(),
+              ),
             ),
           ),
-        ),
-        SizedBox(width: 8.w),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              transaction.toString(),
-              style: CustomTheme.lightTheme.textTheme.bodyText2
-                  ?.copyWith(color: color),
-            ),
-            Text(DateFormat('yyyy-MM-dd').format(transaction.date),
+          SizedBox(width: 8.w),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                transaction.toString(),
                 style: CustomTheme.lightTheme.textTheme.bodyText2
-                    ?.copyWith(fontSize: 12))
-          ],
-        ),
-        const Spacer(),
-        Text(
-          transaction.value.toString(),
-          style: TextStyle(
-              color: transaction.type == TransactionType.profit
-                  ? Colors.green
-                  : Colors.red),
-        ),
-        SizedBox(width: 29.w),
-      IconButton(
+                    ?.copyWith(color: color),
+              ),
+              Text(DateFormat('d MMMM y').format(transaction.date),
+                  style: CustomTheme.lightTheme.textTheme.bodyText2
+                      ?.copyWith(fontSize: 12))
+            ],
+          ),
+          const Spacer(),
+          Text(
+            sumWithMinus(transaction.value, transaction.type),
+            style: TextStyle(
+                color: transaction.type == TransactionType.profit
+                    ? Colors.green
+                    : Colors.red),
+          ),
+          SizedBox(width: 29.w),
+          IconButton(
             icon: const Icon(Icons.keyboard_arrow_right_rounded),
             splashRadius: 5,
             color: color,
@@ -76,8 +89,8 @@ class TransactionListElem extends StatelessWidget {
                   .showSimpleDialog();
             },
           ),
-      
-      ]),
+        ]),
+      ),
     );
   }
 }

@@ -25,7 +25,8 @@ class ChooseDialog {
                       context,
                       MaterialPageRoute(
                           builder: (context) => BlocProvider(
-                                create: (context) => TrancationBloc(repository: TransactionRepository()),
+                                create: (context) => TransactionBloc(
+                                    repository: TransactionRepository()),
                                 child: EditTransaction(
                                   id: transaction.id!,
                                   status: transaction.ready,
@@ -42,7 +43,7 @@ class ChooseDialog {
               SimpleDialogOption(
                 onPressed: () {
                   contexta
-                      .read<TrancationBloc>()
+                      .read<TransactionBloc>()
                       .add(DeleteTransactionEvent(transaction: transaction));
                   Navigator.pop(context);
                 },

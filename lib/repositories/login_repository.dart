@@ -6,6 +6,7 @@ import '../models/user_json_model.dart';
 import '../models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../resources/validators/validators.dart';
+import '../resources/constants/enums.dart';
 
 String currentUser = '';
 

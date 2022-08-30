@@ -22,7 +22,7 @@ class TransactionRowWidgetState extends State<TransactionRowWidget> {
   Widget build(BuildContext context) {
     return SizedBox(
         height: 145.h,
-        child: BlocBuilder<TrancationBloc, TrancationState>(
+        child: BlocBuilder<TransactionBloc, TransactionState>(
           builder: (context, state) {
             if (state is FetchLoadingState) {
               return const Center(child: CircularProgressIndicator());

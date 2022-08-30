@@ -12,3 +12,17 @@ enum TransactionCategory {
   awards,
   others
 }
+
+enum TopWidgetType {
+  month,
+  years,
+}
+enum StateUserLogged {
+  isLogged,
+  unLogged,
+}
+
+enum StateUserRegistered {
+  isRegistered,
+  unRegistered,
+}

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:registration/pages/grafic_page.dart';
 import 'package:registration/pages/home_page.dart';
 import 'package:registration/pages/budget/plan_budget_page.dart';
-import '../pages/budget/finish_budget_plan.dart';
-import '../resources/constants/colors.dart';
+import 'package:registration/resources/constants/path_images.dart';
+import 'package:registration/widgets/navigation_bar/icon_widget.dart';
+import '../../pages/budget/finish_budget_plan.dart';
+import '../../resources/constants/colors.dart';
 
 class FloatingNavigationBar extends StatefulWidget {
   final int currentIndex;
@@ -15,18 +17,14 @@ class FloatingNavigationBar extends StatefulWidget {
 }
 
 class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
-  var iconList = const [
-    Icons.home_outlined,
-    Icons.calendar_month_outlined,
-    Icons.wallet_sharp,
-    Icons.verified_user_outlined,
+  List<Image> iconList =  [
+   Image.asset(home),
+  Image.asset(calendar),
+  Image.asset(wallet),
+  Image.asset(grafic),
   ];
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
+ 
   void actionOnTap(index) {
     if (index == 0) {
       Navigator.push(
@@ -34,7 +32,7 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
     }
     if (index == 1) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => PlanPage()));
+          context, MaterialPageRoute(builder: (context) => const PlanPage()));
     }
     if (index == 2) {
       Navigator.push(
@@ -42,7 +40,7 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
     }
       if (index == 3) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => GraficPAge()));
+          context, MaterialPageRoute(builder: (context) => const GraficPAge()));
     }
   }
 
@@ -51,14 +49,14 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
     return AnimatedBottomNavigationBar.builder(
       tabBuilder: (int index, bool isActive) {
         final color =
-            isActive ? Colors.white : const Color.fromRGBO(255, 255, 255, 0.2);
+            isActive ? const Color.fromRGBO(255, 255, 255, 0.2) :null ;
         return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                iconList[index],
-                size: 24,
+              IconWidget(
+               image: iconList[index],
+    
                 color: color,
               )
             ]);

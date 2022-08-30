@@ -1,14 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
 import 'package:registration/repositories/transaction_repository.dart';
-import 'package:registration/widgets/budget_widgets/top_widget.dart';
+import 'package:registration/resources/constants/enums.dart';
+import 'package:registration/widgets/top_widget/top_widget.dart';
 import 'package:registration/widgets/grafic/line_chart.dart';
 
 import '../resources/constants/colors.dart';
-import '../widgets/navigation_bar.dart';
+import '../widgets/navigation_bar/navigation_bar.dart';
 import 'add_transaction/add_lisiner.dart';
 
 class GraficPAge extends StatelessWidget {
@@ -21,7 +21,7 @@ class GraficPAge extends StatelessWidget {
         backgroundColor: purple,
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddTransactionPage()));
+              MaterialPageRoute(builder: (context) =>const AddTransactionPage()));
         },
         child: const Icon(
           Icons.add,
@@ -33,30 +33,36 @@ class GraficPAge extends StatelessWidget {
         currentIndex: 3,
       ),
       body: BlocProvider(
-          create: (context) =>
-              TrancationBloc(repository: TransactionRepository())
-                ..add(FetchEvent()),
-                child:ListView(
-                  children: [
-                    Column(
-                      children: [
-                        TopWidget(ready: true, title: 'Your total expenses'),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 24),
-                          child: SizedBox(
-                            height: 570.h,
-                            child: ListView(
-                               scrollDirection: Axis.horizontal,
-                              children: const [
-                                LineChartWidget(),
-                              ],
-                            ),
-                          ),
-                        )
+        create: (context) =>
+            TransactionBloc(repository: TransactionRepository())
+              ..add(const FetchEvent(onlyYear: true)),
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                TopWidget(
+                  ready: true,
+                  title: 'Your total expenses',
+                  topWidgetType: TopWidgetType.years,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: SizedBox(
+                    height: 540.h,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: const [
+                        LineChartWidget(),
                       ],
-                    )
-                  ],
-                ) ,),
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
