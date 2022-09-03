@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
+import 'package:registration/resources/constants/category_list.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 import 'package:registration/widgets/appbar.dart';
 import 'package:registration/widgets/buttons/back_button.dart';
 import 'package:registration/widgets/buttons/main_button.dart';
 import 'package:registration/widgets/buttons/switch_field.dart';
-import 'package:registration/models/transaction_category.dart';
+import 'package:registration/resources/constants/transaction_category.dart';
 import '../resources/constants/enums.dart';
 
 import '../widgets/textfields/date_textfield.dart';
@@ -13,6 +15,7 @@ import '../widgets/textfields/description.dart';
 import '../widgets/textfields/dropdown_textfield.dart';
 import '../widgets/textfields/money_field.dart';
 import 'package:intl/intl.dart';
+
 
 class EditTransaction extends StatelessWidget {
   final String id;
@@ -23,13 +26,13 @@ class EditTransaction extends StatelessWidget {
   final TransactionType type;
   final TransactionCategory category;
   EditTransaction(
-      {required this.id,
+      {Key? key, required this.id,
       required this.status,
       required this.value,
       required this.type,
       required this.category,
       required this.date,
-      this.description});
+      this.description}) : super(key: key);
   late DateTime currectDate = date;
   late bool currentStatus = status;
   late double currentValue = value;
@@ -53,17 +56,7 @@ class EditTransaction extends StatelessWidget {
     currentCategory = newCategory;
   }
 
-  List<String> dropItem = [
-    ExtensionCategory(TransactionCategory.salariesMg).transactionCategory,
-    ExtensionCategory(TransactionCategory.internalHr).transactionCategory,
-    ExtensionCategory(TransactionCategory.externalHr).transactionCategory,
-    ExtensionCategory(TransactionCategory.credit).transactionCategory,
-    ExtensionCategory(TransactionCategory.dividends).transactionCategory,
-    ExtensionCategory(TransactionCategory.bankCharges).transactionCategory,
-    ExtensionCategory(TransactionCategory.taxes).transactionCategory,
-    ExtensionCategory(TransactionCategory.awards).transactionCategory,
-    ExtensionCategory(TransactionCategory.others).transactionCategory,
-  ];
+  
   int index = 0;
   TextEditingController moneyController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -90,7 +83,7 @@ class EditTransaction extends StatelessWidget {
         }
         if (state is TrancationError) {
           final snackBar = SnackBar(
-            content: const Text('Have wrong'),
+            content: const Text(Localization.wrong),
             action: SnackBarAction(
               label: 'Undo',
               onPressed: () {},
@@ -117,7 +110,7 @@ class EditTransaction extends StatelessWidget {
                       child: CustomBackButton(),
                     ),
                     Text(
-                      'Edit transaction',
+                      Localization.editTransaction,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -128,16 +121,16 @@ class EditTransaction extends StatelessWidget {
                 ),
               ),
               SwitchField(
-                firstLebel: 'Profit',
-                secondLebel: 'Loss',
-                switchTitle: 'Transaction Type',
+                firstLebel:  Localization.profit,
+                secondLebel:  Localization.loss,
+                switchTitle:  Localization.transactionType,
                 index: indexChange(type),
                 saveType: saveType,
               ),
               SwitchField(
-                firstLebel: 'OK',
-                secondLebel: "Wait",
-                switchTitle: 'Status',
+                firstLebel:  Localization.statusOk,
+                secondLebel:  Localization.statusWait,
+                switchTitle:  Localization.status,
                 index: indexChange(status),
                 saveStatus: saveStatus,
               ),
@@ -149,24 +142,24 @@ class EditTransaction extends StatelessWidget {
                 ),
               ),
               DropDownField(
-                dropItem: dropItem,
+                dropItem: CategoryList().dropItem,
                 callback: saveCategory,
                 hint: ExtensionCategory(category).transactionCategory,
                 startCategory: category,
               ),
               MoneyField(
-                nameField: "Enter Amount",
+                nameField: Localization.money,
                 controller: moneyController,
               ),
               DescriptionField(
-                nameField: "Description",
+                nameField:  Localization.description,
                 onChanged: ((s) {}),
                 controller: descriptionController,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 22),
                 child: MainButtonDark(
-                  name: 'Edit',
+                  name: Localization.edit,
                   onPressed: () {
                     Navigator.pushNamed(context, '/home');
                     context.read<TransactionBloc>().add(EditTrancationEvent(

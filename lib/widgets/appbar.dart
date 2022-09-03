@@ -7,7 +7,7 @@ class CustomAppBar extends AppBar {
       : super(
           key: key,
           systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: purple,
+            statusBarColor: AppColor.purple,
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.light,
           ),
@@ -15,32 +15,4 @@ class CustomAppBar extends AppBar {
         );
 }
 
-// class CustomAppBar extends AppBar {
-//   CustomAppBar({Key? key})
-//       : super(
-//           key: key,
-//           iconTheme: const IconThemeData(
-//             size: 13,
-//             color: greyLight,
-//           ),
-//           leading: IconButton(
-//             icon: const Icon(Icons.circle),
-//             onPressed: () {},
-//           ),
-//           automaticallyImplyLeading: false,
-//           actions: <Widget>[
-//             IconButton(
-//               icon: const Icon(Icons.square),
-//               onPressed: () {},
-//             ),
-//             IconButton(
-//               icon: const Icon(Icons.circle),
-//               onPressed: () {},
-//             ),
-//             IconButton(
-//               icon: const Icon(Icons.square),
-//               onPressed: () {},
-//             )
-//           ],
-//         );
-// }
+

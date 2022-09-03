@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 
 import '../../blocs/login/bloc/login_bloc.dart';
 import '../../resources/validators/validators.dart';
@@ -35,7 +36,7 @@ class LoginFormWidgetState extends State<LoginFormWidget> {
             controller: _emailController,
             onChanged: (String str) {},
             errorText: null,
-            nameField: "Username",
+            nameField: Localization.username,
           ),
         ),
         Form(
@@ -44,14 +45,14 @@ class LoginFormWidgetState extends State<LoginFormWidget> {
             validator: (text) => Validators().validatePassword(text),
             controller: _passwordController,
             onChanged: (String str) {},
-            nameField: 'Password',
+            nameField: Localization.password,
             errorText: null,
           ),
         ),
         Align(
           alignment: Alignment.topLeft,
           child: RegularTextButton(
-            name: "Forgot password?",
+            name: Localization.forgot,
             onPressed: () {
               Navigator.pushNamed(context, '/forgotPassword');
             },
@@ -65,7 +66,7 @@ class LoginFormWidgetState extends State<LoginFormWidget> {
             if (state is LoginFailedState) {
               final snackBar = SnackBar(
                 content: const Text(
-                    'The password does not match or there is no such user'),
+                    Localization.passwordNotMatch),
                 action: SnackBarAction(
                   label: 'Undo',
                   onPressed: () {},

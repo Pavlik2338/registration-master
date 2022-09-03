@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../resources/constants/colors.dart';
+import '../../resources/localization/english_localization.dart';
 import '../../widgets/budget_widgets/budget_page_widget.dart';
 import '../../widgets/navigation_bar/navigation_bar.dart';
 import '../add_transaction/add_lisiner.dart';
@@ -11,7 +12,7 @@ class PlanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: purple,
+        backgroundColor:AppColor. purple,
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const AddTransactionPage()));
@@ -26,7 +27,7 @@ class PlanPage extends StatelessWidget {
         currentIndex: 1,
       ),
       body: BaseBudgetWidget(
-        title: "Profit",
+        title: Localization.profit,
         ready: false,
       ),
     );

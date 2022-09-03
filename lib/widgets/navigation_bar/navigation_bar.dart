@@ -1,4 +1,4 @@
-// ignore: depend_on_referenced_packages
+
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:registration/pages/grafic_page.dart';
@@ -18,10 +18,10 @@ class FloatingNavigationBar extends StatefulWidget {
 
 class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
   List<Image> iconList =  [
-   Image.asset(home),
-  Image.asset(calendar),
-  Image.asset(wallet),
-  Image.asset(grafic),
+   Image.asset(PathImages.home),
+  Image.asset(PathImages.calendar),
+  Image.asset(PathImages.wallet),
+  Image.asset(PathImages.grafic),
   ];
 
  
@@ -36,7 +36,7 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
     }
     if (index == 2) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => FinishPlanBudget()));
+          context, MaterialPageRoute(builder: (context) => const FinishPlanBudget()));
     }
       if (index == 3) {
       Navigator.push(
@@ -61,7 +61,7 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
               )
             ]);
       },
-      backgroundColor: purple,
+      backgroundColor: AppColor.purple,
       gapLocation: GapLocation.center,
       notchSmoothness: NotchSmoothness.verySmoothEdge,
       itemCount: iconList.length,
@@ -70,7 +70,7 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
       onTap: (index) => setState(() {
         actionOnTap(index);
       }),
-      // hideAnimationController: _hideBottomBarAnimationController,
+
     );
   }
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../resources/constants/path_images.dart';
-
 class IconWidget extends StatelessWidget {
   final Color? color;
   final Image image;

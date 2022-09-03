@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:registration/models/transaction_category.dart';
-import 'package:registration/repositories/transaction_repository.dart';
+
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../resources/constants/enums.dart';

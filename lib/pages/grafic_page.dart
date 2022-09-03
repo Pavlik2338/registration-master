@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
 import 'package:registration/repositories/transaction_repository.dart';
 import 'package:registration/resources/constants/enums.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 import 'package:registration/widgets/top_widget/top_widget.dart';
 import 'package:registration/widgets/grafic/line_chart.dart';
 
@@ -18,7 +19,7 @@ class GraficPAge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: purple,
+        backgroundColor:AppColor. purple,
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) =>const AddTransactionPage()));
@@ -42,7 +43,7 @@ class GraficPAge extends StatelessWidget {
               children: [
                 TopWidget(
                   ready: true,
-                  title: 'Your total expenses',
+                  title: Localization.total,
                   topWidgetType: TopWidgetType.years,
                 ),
                 Padding(

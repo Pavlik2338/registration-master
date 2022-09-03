@@ -18,7 +18,7 @@ class SplashPage extends StatelessWidget {
       child: Column(children: [SizedBox(
           width: 250.w,
           height: 250.h,
-          child: Image.asset(logo_mobyte)),
+          child: Image.asset(PathImages.logoMobyte)),
           const CircularProgressIndicator(),
       ]),
     ));

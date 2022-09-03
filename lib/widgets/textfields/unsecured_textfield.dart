@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../resources/constants/colors.dart';
 import '../../resources/theme/custom_theme.dart';
 
-// ignore: must_be_immutable
+
 class UnsecuredTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String nameField;
@@ -27,7 +27,7 @@ class UnsecuredTextField extends StatelessWidget {
       child: TextFormField(
         validator: validator,
         controller: controller,
-        cursorColor: greyLight,
+        cursorColor: AppColor.greyLight,
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 18, horizontal: 23),
@@ -37,7 +37,7 @@ class UnsecuredTextField extends StatelessWidget {
           errorText: errorText,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: purple),
+            borderSide: const BorderSide(color: AppColor.purple),
             borderRadius: BorderRadius.circular(10),
           ),
         ),

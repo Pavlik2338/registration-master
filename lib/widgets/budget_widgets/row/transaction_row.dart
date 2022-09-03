@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/widgets/budget_widgets/backgroud/color_of_card.dart';
 import 'package:registration/widgets/budget_widgets/description_dialog.dart';
 import '../../../models/trancation_model.dart';
+import '../../../resources/constants/category_color.dart';
 import '../../../resources/constants/enums.dart';
 
 class TransactionRowElem extends StatelessWidget {
@@ -15,9 +16,9 @@ class TransactionRowElem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorMajor = transaction.getColorMajor();
-    final colorCircle = transaction.getColorCircle();
-    final colorMinor = transaction.getColorMinor();
+    final colorMajor = CategoryColor(category: transaction.category).getColorMajor();
+    final colorCircle = CategoryColor(category: transaction.category).getColorCircle();
+    final colorMinor = CategoryColor(category: transaction.category).getColorMinor();
      String sumWithMinusOnCard(double value,TransactionType type) {
     if (type == TransactionType.loss) {
       return "₽-$value";

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 
 import '../../resources/validators/validators.dart';
 import '../../blocs/registration/bloc/registration_bloc.dart';
@@ -34,7 +35,7 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
             validator: (text) => Validators().validateUsername(text),
             onChanged: (String str) {},
             errorText: null,
-            nameField: "Username",
+            nameField: Localization.username,
           )),
       Form(
         key: _formKeyEmail,
@@ -43,7 +44,7 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
           controller: _emailController,
           onChanged: (String str) {},
           errorText: null,
-          nameField: "Email",
+          nameField:Localization.email,
         ),
       ),
       Form(
@@ -52,7 +53,7 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
           validator: (text) => Validators().validatePassword(text),
           controller: _passwordController,
           onChanged: (String str) {},
-          nameField: 'Password',
+          nameField: Localization.password,
           errorText: null,
         ),
       ),
@@ -63,12 +64,12 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
           validator: (text) {
             if (_passwordController.text == _passwordAgainController.text) {
             } else {
-              return "Passwords don't match";
+              return Localization.passwordError;
             }
           
           },
           onChanged: (String str) {},
-          nameField: 'Confirm password',
+          nameField: Localization.correctPassword,
           errorText: null,
         ),
       ),
@@ -83,7 +84,7 @@ class RegistrationFormWidgetState extends State<RegistrationFormWidget> {
           }
         },
         child: MainButtonDark(
-            name: "Register",
+            name: Localization.register,
             onPressed: () {    
                 context.read<RegistrationBloc>().add(RegistrationSubmitted(
                     username: _usernameController.text.trim(),

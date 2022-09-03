@@ -23,7 +23,7 @@ class RegistrationPage extends StatelessWidget {
           SizedBox(
               width: 170.w,
               height: 170.h,
-              child: Image.asset(logo_mobyte)),
+              child: Image.asset(PathImages.logoMobyte)),
           Padding(
             padding: const EdgeInsets.only(top: 27),
             child: BlocProvider(

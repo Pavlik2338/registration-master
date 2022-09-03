@@ -41,7 +41,7 @@ class MainButtonDark extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        primary: purple,
+        primary: AppColor.purple,
         minimumSize: Size(328.w, 53.h),
       ),
       child: Text(name,

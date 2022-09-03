@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
-import 'package:registration/models/transaction_category.dart';
+import 'package:registration/resources/constants/transaction_category.dart';
+import 'package:registration/resources/constants/category_list.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 import 'package:registration/resources/validators/validators.dart';
 import 'package:registration/widgets/buttons/back_button.dart';
 import 'package:registration/widgets/buttons/main_button.dart';
@@ -24,27 +26,13 @@ class AddTrancationLisiner extends StatefulWidget {
 class AddTrancationLisinerState extends State<AddTrancationLisiner> {
   TextEditingController valueController = TextEditingController();
   TextEditingController description = TextEditingController();
-  List<String> dropItem = [
-    ExtensionCategory(TransactionCategory.salariesMg).transactionCategory,
-    ExtensionCategory(TransactionCategory.internalHr).transactionCategory,
-    ExtensionCategory(TransactionCategory.externalHr).transactionCategory,
-    ExtensionCategory(TransactionCategory.credit).transactionCategory,
-    ExtensionCategory(TransactionCategory.dividends).transactionCategory,
-    ExtensionCategory(TransactionCategory.bankCharges).transactionCategory,
-    ExtensionCategory(TransactionCategory.taxes).transactionCategory,
-    ExtensionCategory(TransactionCategory.awards).transactionCategory,
-    ExtensionCategory(TransactionCategory.others).transactionCategory,
-  ];
+
   TransactionType? type = TransactionType.loss;
   bool? status = false;
   DateTime? date;
   TransactionCategory category = TransactionCategory.awards;
-  bool vision = false;
-  // bool validate() {
-  //   if (valueController.text != null && date != null) {
-  //     return vision = true;
-  //   } else{return vision;}
-  // }
+ 
+ 
 
   void saveType(TransactionType newType) {
     type = newType;
@@ -71,7 +59,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
         }
         if (state is TrancationError) {
           final snackBar = SnackBar(
-            content: const Text('Have wrong'),
+            content: const Text(Localization.wrong),
             action: SnackBarAction(
               label: 'Undo',
               onPressed: () {},
@@ -99,7 +87,7 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
                       child: CustomBackButton(),
                     ),
                     Text(
-                      'Add a transaction',
+                      Localization.addTransaction,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -110,64 +98,54 @@ class AddTrancationLisinerState extends State<AddTrancationLisiner> {
                 ),
               ),
               SwitchField(
-                firstLebel: 'Profit',
-                secondLebel: "Loss",
-                switchTitle: 'Transaction type',
+                firstLebel: Localization.profit,
+                secondLebel: Localization.loss,
+                switchTitle: Localization.transactionType,
                 saveType: saveType,
               ),
               SwitchField(
-                firstLebel: 'OK',
-                secondLebel: "Wait",
-                switchTitle: 'Status',
+                firstLebel: Localization.statusOk,
+                secondLebel: Localization.statusWait,
+                switchTitle: Localization.status,
                 saveStatus: saveStatus,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: DateTextField(
                   callback: saveDate,
-                  validator: (text) =>
-                      Validators().validateRequiredFields(text),
+                 
                 ),
               ),
               DropDownField(
-                dropItem: dropItem,
+                dropItem: CategoryList().dropItem,
                 callback: saveCategory,
               ),
               MoneyField(
-                nameField: "Enter Amount",
+                nameField: Localization.money,
                 controller: valueController,
-                validator: (text) => Validators().validateMoney(text),
+                
               ),
               DescriptionField(
                 controller: description,
-                nameField: "Description",
-                onChanged: ((s) {}),
+                nameField: Localization.description,
+                 onChanged: ((s) {}),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 22),
-                child: BlocListener<TransactionBloc, TransactionState>(
-                  listener: (context, state) {
-                    if (state is FillFields) {
-                      setState(() {
-                        vision = state.success;
-                      });
-                    }
-                  },
-                  child: MainButtonDark(
-                      name: 'Add',
-                      onPressed: () {
-                        context.read<TransactionBloc>().add(
-                              AddTrancationEvent(
-                                  type: type!,
-                                  category: category,
-                                  date: date!,
-                                  status: status!,
-                                  value:
-                                      double.parse(valueController.text.trim()),
-                                  description: description.text),
-                            );
-                      }),
-                ),
+                child: MainButtonDark(
+                    name: Localization.add,
+                    onPressed: () {
+                      context.read<TransactionBloc>().add(
+                            AddTrancationEvent(
+                                type: type!,
+                                category: category,
+                                date: date!,
+                                status: status!,
+                                value:
+                                    double.parse(valueController.text.trim()),
+                                description: description.text),
+                          );
+                    }),
               )
             ],
           ),

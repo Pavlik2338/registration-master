@@ -40,7 +40,7 @@ class SecuredTextFieldState extends State<SecuredTextField> {
           validator: widget.validator,
           controller: widget.controller,
           obscureText: _obscureText,
-          cursorColor: greyLight,
+          cursorColor: AppColor.greyLight,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 18, horizontal: 23),
@@ -50,12 +50,12 @@ class SecuredTextFieldState extends State<SecuredTextField> {
             errorText: widget.errorText,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: purple),
+              borderSide: const BorderSide(color: AppColor.purple),
               borderRadius: BorderRadius.circular(10),
             ),
             suffixIcon: IconButton(
               icon: const Icon(Icons.remove_red_eye, size: 20),
-              color: greyDark,
+              color: AppColor.greyDark,
               onPressed: _showText,
             ),
           ),

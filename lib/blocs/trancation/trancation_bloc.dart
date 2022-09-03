@@ -141,13 +141,4 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     }
   }
 
-  // void _onFieldsFill(
-  //   FilledFields event,
-  //   Emitter<TransactionState> emit,
-  // ) async {
-
-  //   bool success =
-  //       repository.fieldsFill(event.value, event.date, event.category);
-  //   emit(FillFields(success: success));
-  // }
 }

@@ -31,7 +31,7 @@ class MoneyField extends StatelessWidget {
           inputFormatters: [],
           validator: validator,
           controller: controller,
-          cursorColor: greyLight,
+          cursorColor: AppColor.greyLight,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 18, horizontal: 23),
@@ -41,7 +41,7 @@ class MoneyField extends StatelessWidget {
             errorText: errorText,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: purple),
+              borderSide: const BorderSide(color: AppColor.purple),
               borderRadius: BorderRadius.circular(10),
             ),
           ),

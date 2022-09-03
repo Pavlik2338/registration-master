@@ -1,12 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
-import 'package:registration/models/user_model.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 import 'package:registration/widgets/budget_widgets/budget_list/transaction_list.dart';
-import '../../../models/trancation_model.dart';
 
 class TransactionListWidget extends StatefulWidget {
   final bool ready;
@@ -43,7 +40,7 @@ class TransactionListWidgetState extends State<TransactionListWidget> {
                 ],
               );
             }
-            return const Text("Nothing here...");
+            return const Text(Localization.noTransaction);
           },
         ));
   }

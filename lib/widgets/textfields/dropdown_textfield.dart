@@ -1,10 +1,12 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:registration/models/transaction_category.dart';
-import '../../resources/constants/colors.dart';
+import 'package:registration/resources/constants/transaction_category.dart';
+import 'package:registration/resources/convert/string_to_category.dart';
+import 'package:registration/resources/localization/english_localization.dart';
+
 import '../../resources/constants/enums.dart';
 
 class DropDownField extends StatefulWidget {
@@ -13,7 +15,9 @@ class DropDownField extends StatefulWidget {
   final String hint;
   final void Function(TransactionCategory) callback;
    final TransactionCategory? startCategory;
-  DropDownField(
+
+   // ignore: use_key_in_widget_constructors
+   const DropDownField(
       {required this.dropItem,
       this.controller,
       required this.callback,
@@ -25,31 +29,7 @@ class DropDownField extends StatefulWidget {
 
 class _DropDownFieldState extends State<DropDownField> {
  late String selectedValue =widget.startCategory==null ? '': ExtensionCategory(widget.startCategory!).transactionCategory ;
-  TransactionCategory func(String string) {
-    switch (string) {
-      case ('Salaries dev.'):
-        return TransactionCategory.salariesDev;
-      case ('Salaries mg.'):
-        return TransactionCategory.salariesMg;
-      case ('Internal HR'):
-        return TransactionCategory.internalHr;
-      case ('External HR'):
-        return TransactionCategory.externalHr;
-      case ('Credit'):
-        return TransactionCategory.credit;
-      case ('Dividends'):
-        return TransactionCategory.dividends;
-      case ('Bank Charges'):
-        return TransactionCategory.bankCharges;
-      case ('Taxes'):
-        return TransactionCategory.taxes;
-      case ('Awards'):
-        return TransactionCategory.awards;
-      case ('Others'):
-        return TransactionCategory.others;
-    }
-    return TransactionCategory.others;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -97,12 +77,12 @@ class _DropDownFieldState extends State<DropDownField> {
             .toList(),
         validator: (value) {
           if (value == null) {
-            return 'Please select category.';
+            return Localization.selectCategory;
           }
         },
         onChanged: (value) {
           selectedValue = value.toString();
-          widget.callback(func(selectedValue));
+          widget.callback(StringToCategory().func(selectedValue));
         },
       ),
     );

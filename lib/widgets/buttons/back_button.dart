@@ -18,7 +18,7 @@ class CustomBackButton extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          backgroundColor: purple.withOpacity(0.5),
+          backgroundColor: AppColor.purple.withOpacity(0.5),
           child: const Icon(Icons.arrow_back, color: Colors.white),
         ),
       ),

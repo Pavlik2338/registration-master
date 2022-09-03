@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:registration/resources/constants/colors.dart';
-import 'package:registration/resources/validators/validators.dart';
+import 'package:registration/resources/localization/english_localization.dart';
+
 
 class DateTextField extends StatefulWidget {
   final void Function(DateTime) callback;
@@ -37,7 +38,7 @@ class _DateTextFieldState extends State<DateTextField> {
         controller: dateinput,
         decoration: InputDecoration(
           label: const Text(
-            "Date",
+            Localization.date,
             style: TextStyle(
               color: Color.fromRGBO(27, 27, 27, 0.5),
               fontSize: 14,
@@ -48,7 +49,7 @@ class _DateTextFieldState extends State<DateTextField> {
               const EdgeInsets.symmetric(vertical: 18, horizontal: 23),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: purple),
+            borderSide: const BorderSide(color: AppColor.purple),
             borderRadius: BorderRadius.circular(10),
           ),
         ),
@@ -59,12 +60,12 @@ class _DateTextFieldState extends State<DateTextField> {
                 return Theme(
                   data: ThemeData.dark().copyWith(
                       colorScheme: const ColorScheme.dark(
-                        primary: purple,
+                        primary: AppColor.purple,
                         onPrimary: Color.fromARGB(85, 27, 27, 27),
                         surface: Color.fromARGB(255, 97, 69, 113),
                         onSurface: Color.fromARGB(255, 224, 177, 251),
                       ),
-                      dialogBackgroundColor: purple,
+                      dialogBackgroundColor:AppColor. purple,
                       textButtonTheme: TextButtonThemeData(
                         style: TextButton.styleFrom(
                           primary: Colors.white,

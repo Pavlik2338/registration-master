@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/blocs/trancation/trancation_bloc.dart';
 import 'package:registration/resources/constants/enums.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 import 'package:registration/widgets/top_widget/year_view.dart';
 
 import '../../repositories/transaction_repository.dart';
@@ -13,7 +14,8 @@ class TopWidget extends StatelessWidget {
   final String title;
   final bool ready;
   final TopWidgetType topWidgetType;
-  TopWidget(
+  // ignore: use_key_in_widget_constructors
+  const TopWidget(
       {required this.ready, required this.title, required this.topWidgetType});
   String titleOfWidget(double sum) {
     if (sum < 0) {
@@ -66,7 +68,7 @@ class TopWidget extends StatelessWidget {
                   ],
                 );
               }
-              return const Text("You haven't transaction on this month");
+              return const Text(Localization.noTransactionOnThisMonth);
             },
           )
         ],

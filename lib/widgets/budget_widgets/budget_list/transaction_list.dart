@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:registration/resources/constants/category_color.dart';
+import 'package:registration/resources/constants/path_images.dart';
 import 'package:registration/widgets/budget_widgets/dialog_window.dart';
 import '../../../blocs/trancation/trancation_bloc.dart';
 import '../../../models/trancation_model.dart';
@@ -23,7 +25,7 @@ class TransactionListElem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = transaction.getColorTitle();
+    final color = CategoryColor(category: transaction.category).getColorTitle();
     return Container(
       margin: EdgeInsets.only(top: 11.h),
       child: GestureDetector(
@@ -51,7 +53,7 @@ class TransactionListElem extends StatelessWidget {
                     ? SizedBox(
                         height: 24.h,
                         width: 24.w,
-                        child: Image.asset('assets/images/ok.png'),
+                        child: Image.asset(PathImages.ok),
                       )
                     : Container(),
               ),

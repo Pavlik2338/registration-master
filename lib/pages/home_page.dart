@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/models/user_model.dart';
 import 'package:registration/pages/add_transaction/add_lisiner.dart';
 import 'package:registration/resources/constants/colors.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 import 'package:registration/widgets/appbar.dart';
 
 import '../resources/constants/path_images.dart';
@@ -25,10 +26,10 @@ class _HomePageState extends State<HomePage> {
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: purple,
+        backgroundColor: AppColor.purple,
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddTransactionPage()));
+              MaterialPageRoute(builder: (context) => const AddTransactionPage()));
         },
         child: const Icon(
           Icons.add,
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             SizedBox(
-                width: 250.w, height: 250.h, child: Image.asset(logo_mobyte)),
+                width: 250.w, height: 250.h, child: Image.asset(PathImages.logoMobyte)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(thisUser.email!,style:const TextStyle(fontSize: 20,fontWeight: FontWeight.w700),),
@@ -65,14 +66,14 @@ class _HomePageState extends State<HomePage> {
                   leading: Container(
                     width: 36.w,
                     height: 36.h,
-                    color: purple,
+                    color: AppColor.purple,
                     child: const Icon(
                       Icons.sentiment_satisfied_alt,
                       color: Colors.white,
                     ),
                   ),
                   title: const Text(
-                    'Face ID',
+                    Localization.faceID,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 17,
@@ -89,7 +90,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ElevatedButton(
-              child: const Text("Sign out"),
+              child: const Text(Localization.singOut),
               onPressed: () {
                 FirebaseAuth.instance.signOut();
                 Navigator.pushNamed(context, '/login');

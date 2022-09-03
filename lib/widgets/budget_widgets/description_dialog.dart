@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+
+
 import 'package:flutter/material.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 
 import '../../models/trancation_model.dart';
 
@@ -28,12 +30,12 @@ class DiscriptionDialog {
                const Align(alignment: Alignment.topCenter,
                   child:  Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text('Description ',style: TextStyle(fontSize: 12),),
+                    child: Text(Localization.description,style: TextStyle(fontSize: 12),),
                   )),
                 Center(
                   child: Text(
                     transaction.description == null
-                        ? 'Вescription is missing.'
+                        ? Localization.noDescription
                         : transaction.description!,
                     style:
                         const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),

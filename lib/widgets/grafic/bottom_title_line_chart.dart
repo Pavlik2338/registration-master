@@ -1,45 +1,46 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 
 Widget bottomTitleWidgets(double value, TitleMeta meta) {
 
   String text;
   switch (value.toInt()) {
 case 0:
-      text = "Jan";
+      text = Localization.jan;
       break;
     case 1:
-      text = "Feb";
+      text = Localization.feb;
       break;
     case 2:
-      text = "Mar";
+      text =Localization.mar;
       break;
     case 3:
-      text = "Apr";
+      text = Localization.apr;
       break;
     case 4:
-      text = "May";
+      text =Localization.may;
       break;
     case 5:
-      text = "Jun";
+      text = Localization.jun;
       break;
     case 6:
-      text = "Jul";
+      text =Localization.jul;
       break;
     case 7:
-      text = "Aug";
+      text =Localization.aug;
       break;
     case 8:
-      text = "Sep";
+      text = Localization.sep;
       break;
     case 9:
-      text = "Oct";
+      text = Localization.oct;
       break;
     case 10:
-      text = "Nov";
+      text = Localization.nov;
       break;
     case 11:
-      text = "Dec";
+      text = Localization.dec;
       break;
       default:
       return Container();

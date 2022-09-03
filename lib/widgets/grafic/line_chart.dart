@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,7 +78,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                         lineTouchData: LineTouchData(
                             touchTooltipData: LineTouchTooltipData(
                                 tooltipRoundedRadius: 12.5,
-                                tooltipBgColor: purple)),
+                                tooltipBgColor:AppColor. purple)),
                         minX: 0,
                         maxX: 11,
                         minY: -1,
@@ -92,7 +91,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                             gradient: const LinearGradient(
                               colors: [
                                 Colors.white,
-                                purple,
+                                AppColor.purple,
                               ],
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,

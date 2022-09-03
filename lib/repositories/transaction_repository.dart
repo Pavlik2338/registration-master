@@ -45,26 +45,7 @@ class TransactionRepository {
     }
   }
 
-  Future<Stream?> foundTransaction({
-    required int month,
-    required int year,
-  }) async {
-    DateTime date = DateTime(year, month, 1);
-    bool success = false;
-    try {
-      final allDoc = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(thisUser.username)
-          .collection('transactions')
-          .where('date', isGreaterThanOrEqualTo: date)
-          .snapshots();
-      success = true;
-      return allDoc;
-    } on FirebaseAuthException catch (e) {
-      success = false;
-      return null;
-    }
-  }
+
 
   Future<bool> editTransaction(
       {required String id,
@@ -163,14 +144,6 @@ class TransactionRepository {
     }
   }
 
-  bool fieldsFill(
-      double? value, DateTime? date, TransactionCategory? category) {
-    if (value == null && date == null && category == null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   List<FlSpot> spotsGrafic({required List<TransactionModel> tranc}) {
     List<FlSpot> spots = [];
@@ -196,7 +169,7 @@ class TransactionRepository {
         sumOfMonth[i] / (divide / 10),
       ));
     }
-    print(maxSum);
+   
     return spots;
   }
 }

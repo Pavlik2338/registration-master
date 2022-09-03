@@ -15,7 +15,7 @@ class RegularTextButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(name,
           style: CustomTheme.lightTheme.textTheme.bodyText1
-              ?.copyWith(color: purple)),
+              ?.copyWith(color:AppColor. purple)),
     );
   }
 }

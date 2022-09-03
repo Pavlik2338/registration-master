@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginPageDivider extends StatelessWidget {
+  const LoginPageDivider({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(

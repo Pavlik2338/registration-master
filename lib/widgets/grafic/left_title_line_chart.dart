@@ -2,9 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:registration/resources/validators/scale_of_grafic.dart';
 
-import '../../repositories/transaction_repository.dart';
+
 import '../../resources/constants/colors.dart';
-import '../../resources/theme/custom_theme.dart';
+
 
 Widget leftTitleWidgets(double value, TitleMeta meta) {
   String text;
@@ -27,7 +27,7 @@ Widget leftTitleWidgets(double value, TitleMeta meta) {
   }
   return Text(text,
       style: TextStyle(
-          color: black.withOpacity(0.5),
+          color: AppColor.black.withOpacity(0.5),
           fontWeight: FontWeight.w400,
           fontSize: 12,
           fontFamily: "Nunito"),

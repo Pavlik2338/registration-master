@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:registration/models/user_model.dart';
+
 import 'package:registration/pages/edit_transaction.dart';
 import 'package:registration/repositories/transaction_repository.dart';
+import 'package:registration/resources/localization/english_localization.dart';
 
 import '../../blocs/trancation/trancation_bloc.dart';
 import '../../models/trancation_model.dart';
@@ -17,7 +17,7 @@ class ChooseDialog {
         context: contexta,
         builder: (context) {
           return SimpleDialog(
-            title: const Text('Choose an Option'),
+            title: const Text(Localization.dialogWindow),
             children: <Widget>[
               SimpleDialogOption(
                 onPressed: () {
@@ -38,7 +38,7 @@ class ChooseDialog {
                                 ),
                               )));
                 },
-                child: const Text('Change'),
+                child: const Text(Localization.firstOption),
               ),
               SimpleDialogOption(
                 onPressed: () {
@@ -47,7 +47,7 @@ class ChooseDialog {
                       .add(DeleteTransactionEvent(transaction: transaction));
                   Navigator.pop(context);
                 },
-                child: const Text('Delete'),
+                child: const Text(Localization.secondOption),
               ),
             ],
           );

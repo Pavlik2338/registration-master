@@ -1,6 +1,6 @@
 
 
-import '../resources/constants/enums.dart';
+import 'enums.dart';
 
 extension ExtensionCategory on TransactionCategory {
   String get transactionCategory {

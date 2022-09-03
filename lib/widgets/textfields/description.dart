@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:registration/resources/constants/colors.dart';
 
@@ -23,7 +23,7 @@ class DescriptionField extends StatelessWidget {
       child: TextFormField(
         maxLines: 12,
         controller: controller,
-        cursorColor: greyDark,
+        cursorColor: AppColor.greyDark,
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 18, horizontal: 8),
@@ -41,7 +41,7 @@ class DescriptionField extends StatelessWidget {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           focusedBorder: OutlineInputBorder(
             
-            borderSide: const BorderSide(color: purple),
+            borderSide: const BorderSide(color: AppColor.purple),
             borderRadius: BorderRadius.circular(10),
           ),
         ),

@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:registration/models/trancation_model.dart';
-import 'package:registration/repositories/login_repository.dart';
+import 'package:registration/resources/localization/english_localization.dart';
+
 import 'package:registration/widgets/budget_widgets/row/transaction_row.dart';
 
 import '../../../blocs/trancation/trancation_bloc.dart';
-import '../../../models/user_model.dart';
+
 
 class TransactionRowWidget extends StatefulWidget {
   final bool ready;
@@ -42,7 +42,7 @@ class TransactionRowWidgetState extends State<TransactionRowWidget> {
                 ],
               );
             }
-            return const Text("Havent traansactions");
+            return const Text(Localization.haventTransaction);
           },
         ));
   }
